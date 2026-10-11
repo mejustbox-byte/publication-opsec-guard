@@ -2,14 +2,14 @@
 
 ## Current state
 
-The 0.2.0a1 text alpha has five rules, contract 0.2 and 22 regression tests. M1 is implemented; M2 is partial: explicit exclusions and empty-scope handling are delivered, while schema and standalone validation remain pending.
+The 0.2.0a2 text alpha has five rules, contract 0.2 and 37 test methods. M1 and M2 are implemented. M2 delivers a bundled schema, standalone validator, labeled response fixtures and automated bilingual-document checks; the remaining milestones below are planned.
 
 ## Milestones
 
 | Milestone | Work | Reviewable output | Completion gate |
 |---|---|---|---|
 | M1: implemented | Explicit UTF-8 policy, strict fields, exact `.env`, aggregate limits | CLI and regression tests | Policy typos are not silent; exhausted limits produce gaps, not success |
-| M2: partial | Versioned schema, explicit exclusions and empty-input handling | Schema, validator, updated RU/EN examples | Consumer distinguishes startup error, empty scope and result |
+| M2: implemented | Versioned schema, explicit exclusions and empty-input handling | Schema, validator, updated RU/EN examples | Consumer distinguishes startup error, empty scope and result |
 | M3: rule quality | Positive/negative/boundary cases per ID | Labeled synthetic corpus | Every claimed representation has a test; measurements are published without inflation |
 | M4: distribution | CLI packaging, fixed dependencies, reproducible build | Installation artifact and guide | Installation verified in a clean environment; report exposes version |
 | M5: integrations | CI example, pre-commit, specialist secret-scanner adapter | Failure/missing-engine tests | External engine failures remain visible; raw secrets are not emitted |

@@ -1,0 +1,76 @@
+{
+  "schema_version": "0.2",
+  "tool_version": "0.2.0a2",
+  "scope": "utf8-text-only",
+  "coverage_complete": true,
+  "files_inspected": 1,
+  "files_encountered": 1,
+  "bytes_read": 88,
+  "scan_stopped": false,
+  "limits": {
+    "max_bytes": 2000000,
+    "max_files": 10000,
+    "max_total_bytes": 50000000,
+    "max_findings": 10000,
+    "max_directories": 10000
+  },
+  "exclusions": [],
+  "findings": [
+    {
+      "check_id": "PUB-001",
+      "asset_id": "notes.md",
+      "status": "fail",
+      "severity": "high",
+      "evidence": {
+        "line": 1,
+        "redacted": true
+      },
+      "remediation": "Replace internal addresses with documentation addresses."
+    },
+    {
+      "check_id": "PUB-002",
+      "asset_id": "notes.md",
+      "status": "fail",
+      "severity": "medium",
+      "evidence": {
+        "line": 2,
+        "redacted": true
+      },
+      "remediation": "Replace internal domain names with example.invalid."
+    },
+    {
+      "check_id": "PUB-003",
+      "asset_id": "notes.md",
+      "status": "fail",
+      "severity": "medium",
+      "evidence": {
+        "line": 3,
+        "redacted": true
+      },
+      "remediation": "Replace identifying user paths with synthetic examples."
+    },
+    {
+      "check_id": "PUB-004",
+      "asset_id": "notes.md",
+      "status": "fail",
+      "severity": "critical",
+      "evidence": {
+        "line": 4,
+        "redacted": true
+      },
+      "remediation": "Remove the private key; if exposed, rotate it."
+    },
+    {
+      "check_id": "PUB-005",
+      "asset_id": "notes.md",
+      "status": "fail",
+      "severity": "high",
+      "evidence": {
+        "line": 5,
+        "redacted": true
+      },
+      "remediation": "Review and replace the organization marker."
+    }
+  ],
+  "coverage_gaps": []
+}

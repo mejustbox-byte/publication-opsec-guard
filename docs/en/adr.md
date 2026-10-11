@@ -32,7 +32,7 @@ Each decision describes context, choice and consequences. Status refers to the c
 
 **Decision:** emit JSON with relative paths and line numbers, omitting raw matches. Policy is JSON with literal markers.
 
-**Consequences:** investigation requires local source-copy access; paths can disclose information. HTML, SARIF, JSON Schema and localized runtime messages are not shipped.
+**Consequences:** investigation requires local source-copy access; paths can disclose information. HTML, SARIF and localized runtime messages are not shipped. A bundled JSON Schema and optional validator are delivered in 0.2.0a2.
 
 ## ADR-004 — coverage errors separate from findings
 
@@ -53,6 +53,18 @@ Each decision describes context, choice and consequences. Status refers to the c
 **Decision:** define limits, extracted sections, unsupported cases and tests before adding a format. Do not expand the extension list without actual content handling.
 
 **Consequences:** binary-document support waits for verifiable implementation, preserving truthful text-alpha results.
+
+## ADR-006 — optional standards-based report validation
+
+**Status:** accepted for 0.2.0a2.
+
+**Context:** structural types are insufficient for coverage and budget consistency. Reimplementing the complete JSON Schema language would add unnecessary maintenance risk.
+
+**Decision:** keep the scanner dependency-free; use optional `jsonschema==4.26.0` with pinned transitive versions for Draft 2020-12 validation. Bundle all schema references locally and deny network retrieval. Apply producer-specific cross-field invariants separately. Validator exit codes preserve scanner meaning; malformed or unavailable validation returns 3.
+
+**Alternatives:** hand-maintained shape checks could drift from the published schema; structural validation alone would permit contradictory counters. A hosted validator would unnecessarily transfer reports.
+
+**Consequences:** validator installation needs dependencies and an intact schemas directory. Validation does not authenticate the producer or authorize publication. Full tests/CI install the optional environment; scanner-only tests remain `python3 -m unittest test_guard -v`.
 
 ---
 

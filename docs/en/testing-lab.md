@@ -5,10 +5,12 @@
 From the repository root:
 
 ```bash
+python3 -m pip install -r requirements-validation.txt
 python3 -m unittest discover -v
+python3 check_docs.py
 ```
 
-Expect 22 tests and `OK`. Tests use temporary directories and synthetic strings, not production infrastructure or actual secrets. The symlink test requires permission to create links; the specific Windows runner passed, but local Windows policies may differ.
+Install optional validation dependencies, then expect 37 tests and `OK`. Tests use temporary directories and synthetic strings, not production infrastructure or actual secrets. The symlink test requires permission to create links; the specific Windows runner passed, but local Windows policies may differ.
 
 ## Verification layers
 
