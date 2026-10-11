@@ -4,4 +4,4 @@ Each check: unsafe input → fail; safe input → pass; missing evidence → not
 
 ## Locally executed
 
-8 tests: five rules and match redaction; documentation addresses; RFC1918 boundaries; symlink and unsupported format; size/encoding/binary text; file count; literal marker; clean text. No Windows/macOS lab or CI yet.
+9 tests: five rules and match redaction; documentation addresses; RFC1918 boundaries; symlink and unsupported format; size/encoding/binary text; file count; literal marker; clean text. No Windows/macOS lab or CI yet.

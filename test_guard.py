@@ -34,4 +34,22 @@ class GuardTests(unittest.TestCase):
   self.assertEqual(len(self.run_scan('a.b axb',['a.b'])['findings']),1)
  def test_clean(self):
   r=self.run_scan('Example documentation');self.assertTrue(r['coverage_complete']);self.assertFalse(r['findings'])
+class CliTests(unittest.TestCase):
+ def test_exit_codes_and_invalid_policy(self):
+  import subprocess,sys
+  guard=Path(__file__).with_name('guard.py')
+  with tempfile.TemporaryDirectory() as tmp:
+   directory=Path(tmp,'input');directory.mkdir()
+   def invoke(*args):
+    return subprocess.run([sys.executable,str(guard),str(directory),*args],capture_output=True,text=True)
+   Path(directory,'safe.md').write_text('Safe example')
+   self.assertEqual(invoke().returncode,0)
+   Path(directory,'safe.md').write_text('10.1.2.3')
+   self.assertEqual(invoke().returncode,1)
+   Path(directory,'safe.md').unlink();Path(directory,'unknown.pdf').write_bytes(b'x')
+   self.assertEqual(invoke().returncode,2)
+   policy=Path(tmp,'policy.json');policy.write_text('{"markers":[""]}')
+   out=invoke('--policy',str(policy));self.assertEqual(out.returncode,2);self.assertEqual(json.loads(out.stdout)['status'],'not_tested')
+   self.assertEqual(invoke('--max-bytes','0').returncode,2)
+
 if __name__=='__main__':unittest.main()
