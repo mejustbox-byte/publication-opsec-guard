@@ -42,6 +42,10 @@ This establishes a specific test suite on hosted runners. It does not replace us
 
 The suite now contains 22 test methods. These tests verify behavior on synthetic inputs, not exhaustive rule accuracy, race resistance or bounded process memory.
 
+## Current implementation verification
+
+All 22 tests passed on Linux, Windows and macOS with Python 3.13 in [run 38155720812](https://github.com/mejustbox-byte/publication-opsec-guard/actions/runs/38155720812) at implementation head `197f07d563b25193c86ab011e8bfd0798e005bc1`. Documentation links, language parity and the user-guide example were checked locally.
+
 ---
 
 [Documentation index](index.md) · [Русский](../ru/check-matrix.md)

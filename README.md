@@ -46,6 +46,6 @@ Files use UTF-8 and a limited extension list; JSON/YAML are not parsed semantica
 
 ## Verification and documentation
 
-The earlier nine-test baseline passed in [CI](https://github.com/mejustbox-byte/publication-opsec-guard/actions/runs/38153720204) on Linux, Windows and macOS. The [matrix](docs/en/check-matrix.md) explains the limits of this evidence.
+All 22 tests passed in [CI](https://github.com/mejustbox-byte/publication-opsec-guard/actions/runs/38155720812) on Linux, Windows and macOS. The [matrix](docs/en/check-matrix.md) documents the tested implementation head and limits of this evidence.
 
 Start with the [documentation index](docs/en/index.md): requirements, threats, architecture, ADR, rules, CLI/policy, JSON, troubleshooting, tests and milestones. [Release notes](docs/en/release-notes.md) describe actual status; the alpha release remains a draft.

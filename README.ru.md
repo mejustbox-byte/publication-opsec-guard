@@ -46,6 +46,6 @@ Python должен быть установлен; сторонние пакет
 
 ## Проверки и документация
 
-Предыдущие девять тестов прошли в [CI](https://github.com/mejustbox-byte/publication-opsec-guard/actions/runs/38153720204) на Linux, Windows и macOS. [Матрица](docs/ru/check-matrix.md) объясняет границы этого свидетельства.
+Все 22 теста прошли в [CI](https://github.com/mejustbox-byte/publication-opsec-guard/actions/runs/38155720812) на Linux, Windows и macOS. [Матрица](docs/ru/check-matrix.md) указывает проверенный head реализации и границы этого свидетельства.
 
 Начните с [оглавления](docs/ru/index.md): требования, модель угроз, архитектура, ADR, правила, CLI/политика, JSON, диагностика, тесты и план развития. [Release notes](docs/ru/release-notes.md) перечисляют фактическое состояние; alpha-release пока в черновике.

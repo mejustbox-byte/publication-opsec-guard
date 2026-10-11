@@ -33,6 +33,10 @@ Documentation now separates actual implementation from plans: navigation, step-b
 
 Code is in the public repository; the GitHub alpha release is prepared as a draft. A release-notes file does not imply a published release. Close the listed development-plan limitations before relying on it as the sole publication control.
 
+## Current implementation verification
+
+All 22 tests passed on Linux, Windows and macOS with Python 3.13 in [run 38155720812](https://github.com/mejustbox-byte/publication-opsec-guard/actions/runs/38155720812) at implementation head `197f07d563b25193c86ab011e8bfd0798e005bc1`. Documentation links, language parity and the user-guide example were checked locally.
+
 ---
 
 [Documentation index](index.md) · [Русский](../ru/release-notes.md)
