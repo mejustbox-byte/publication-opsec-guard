@@ -54,7 +54,7 @@ Partially masking a private key does not make an exposed real key safe. If a rea
 
 ## 6. What success does not establish
 
-Exit code 0 does not establish token absence, EXIF cleaning, Git-history inspection or screenshot OCR. An empty directory also returns 0: evaluate `files_inspected: 0` separately. See the [report contract](report-format.md) for field meanings.
+Exit code 0 does not establish token absence, EXIF cleaning, Git-history inspection or screenshot OCR. An empty directory returns 2 and records `empty_scope`; exclusions also prevent complete coverage. See the [report contract](report-format.md) for field meanings.
 
 ---
 

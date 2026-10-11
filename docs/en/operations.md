@@ -26,8 +26,8 @@ The supplied `Tests` workflow tests the product; it **does not automatically ins
 
 | Symptom | Likely cause | Check and response |
 |---|---|---|
-| Code 0 but nothing inspected | Empty directory or intentionally excluded subdirectories only | Check `files_inspected` and target path |
-| `.env` skipped | Exact filename has no `Path.suffix` | Inspect separately; do not claim coverage |
+| Code 2 and nothing inspected | Empty scope or excluded/unsupported objects only | Inspect `empty_scope`, `exclusions` and target path |
+| `.env` produces findings | Exact filename is now supported | Review the source; retain policy outside the tree |
 | Text file skipped | Limits, permissions, encoding or NUL | Read `reason` and prepare a suitable copy |
 | Marker absent | Misspelled field, alternate representation, policy encoding | Check `markers`, literal text and a local example |
 | Excessive findings | Short markers, educational examples, repeated values | Refine scope and policy; assess each category |

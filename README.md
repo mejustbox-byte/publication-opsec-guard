@@ -6,7 +6,7 @@
 
 Guard locates working addresses, internal domains, user paths, private-key headers and organization markers in prepared material. It identifies files and lines, retains uninspected objects and leaves publication decisions to the information owner.
 
-> **0.1.0a1 is a text-only alpha prototype.** PDF, Office, images, archives and Git history are not inspected. Exit code 0 does not guarantee the absence of secrets.
+> **0.2.0a1 is a text-only alpha prototype.** PDF, Office, images, archives and Git history are not inspected. Exit code 0 does not guarantee the absence of secrets.
 
 [Русский](README.ru.md) · [Full guide](docs/en/index.md) · [Rules](docs/en/rule-catalog.md) · [CLI](docs/en/cli-reference.md) · [Roadmap](docs/en/development-plan.md)
 
@@ -42,10 +42,10 @@ Python must be installed; no third-party packages are required. Write reports **
 
 ## Important behavior
 
-Files use UTF-8 and a limited extension list; JSON/YAML are not parsed semantically. Exact filename `.env` is currently skipped. `.git` and `__pycache__` are excluded. Raw matches are hidden, filenames remain. Total memory lacks a separate limit; use isolated copies for untrusted trees.
+Files use UTF-8 and a limited extension list; JSON/YAML are not parsed semantically. `.env` files, including exact filename `.env`, are inspected. `.git` and `__pycache__` are excluded and recorded; coverage is incomplete. Raw matches are hidden, filenames remain. Total memory lacks a separate limit; use isolated copies for untrusted trees.
 
 ## Verification and documentation
 
-Nine tests passed in [CI](https://github.com/mejustbox-byte/publication-opsec-guard/actions/runs/38153720204) on Linux, Windows and macOS. The [matrix](docs/en/check-matrix.md) explains the limits of this evidence.
+The earlier nine-test baseline passed in [CI](https://github.com/mejustbox-byte/publication-opsec-guard/actions/runs/38153720204) on Linux, Windows and macOS. The [matrix](docs/en/check-matrix.md) explains the limits of this evidence.
 
 Start with the [documentation index](docs/en/index.md): requirements, threats, architecture, ADR, rules, CLI/policy, JSON, troubleshooting, tests and milestones. [Release notes](docs/en/release-notes.md) describe actual status; the alpha release remains a draft.

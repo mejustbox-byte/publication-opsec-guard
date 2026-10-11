@@ -1,6 +1,6 @@
 # Publication OPSEC Guard documentation
 
-> **Implementation:** 0.1.0a1 · **Report contract:** 0.1 · **Status:** text-only alpha prototype.
+> **Implementation:** 0.2.0a1 · **Report contract:** 0.2 · **Status:** text-only alpha prototype.
 
 Publication OPSEC Guard inspects prepared material before it leaves an organization. It reads local UTF-8 files, checks five disclosure categories and returns JSON with finding locations. It does not modify input material or send it to external services.
 

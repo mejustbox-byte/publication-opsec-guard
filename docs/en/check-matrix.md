@@ -27,6 +27,21 @@
 
 This establishes a specific test suite on hosted runners. It does not replace user-environment testing, corpus accuracy measurement or real-document operational validation. Every new support claim must add a test and result to this matrix.
 
+## Hardening regressions in 0.2
+
+| Area | Test methods | Evidence |
+|---|---|---|
+| Scope | `test_exact_env`, `test_empty_scope`, `test_exclusions_visible` | Exact `.env` inspected; empty and excluded scope cannot be clean |
+| Bytes | `test_total_bytes_limit_and_exact_boundary`, `test_invalid_files_consume_byte_budget` | Aggregate limit, exact boundary, rejected-input accounting |
+| Findings | `test_finding_limit_and_exact_boundary` | Cap retains allowed matches; overflow remains visible |
+| Traversal | `test_directory_limit` | Root included; excessive child fanout stops |
+| Policy | `test_policy_utf8`, `test_policy_unknown_and_duplicate_fields`, `test_policy_limits_and_duplicate_markers` | Cyrillic markers, unknown/duplicate keys, malformed roots, byte/marker caps |
+| API | `test_positive_integer_api_limits` | Reject zero, negative, boolean and noninteger budget |
+| Location | `test_newline_line_numbers` | Repeated markers report correct lines |
+| CLI | `test_cli_empty_unknown_utf8_and_limits` | Empty scope, Cyrillic policy, typo and budget exit behavior |
+
+The suite now contains 22 test methods. These tests verify behavior on synthetic inputs, not exhaustive rule accuracy, race resistance or bounded process memory.
+
 ---
 
 [Documentation index](index.md) · [Русский](../ru/check-matrix.md)

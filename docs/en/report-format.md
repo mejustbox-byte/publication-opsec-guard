@@ -1,4 +1,4 @@
-# JSON report contract 0.1
+# JSON report contract 0.2
 
 ## Purpose
 
@@ -8,18 +8,32 @@ Reports support local review and publication-pipeline integration. The current f
 
 ```json
 {
-  "schema_version": "0.1",
-  "tool_version": "0.1.0a1",
+  "schema_version": "0.2",
+  "tool_version": "0.2.0a1",
   "scope": "utf8-text-only",
   "coverage_complete": true,
   "files_inspected": 1,
+  "files_encountered": 1,
+  "bytes_read": 9,
+  "scan_stopped": false,
+  "limits": {
+    "max_bytes": 2000000,
+    "max_files": 10000,
+    "max_total_bytes": 50000000,
+    "max_findings": 10000,
+    "max_directories": 10000
+  },
+  "exclusions": [],
   "findings": [
     {
       "check_id": "PUB-001",
       "asset_id": "notes.md",
       "status": "fail",
       "severity": "high",
-      "evidence": {"line": 1, "redacted": true},
+      "evidence": {
+        "line": 1,
+        "redacted": true
+      },
       "remediation": "Replace internal addresses with documentation addresses."
     }
   ],
@@ -33,15 +47,20 @@ Reports support local review and publication-pipeline integration. The current f
 
 | Field | Type | Meaning |
 |---|---|---|
-| `schema_version` | string | Result shape version; currently `0.1` |
-| `tool_version` | string | Implementation version; currently `0.1.0a1` |
+| `schema_version` | string | Result shape version; currently `0.2` |
+| `tool_version` | string | Implementation version; currently `0.2.0a1` |
 | `scope` | string | `utf8-text-only`; bounds interpretation |
-| `coverage_complete` | boolean | True exactly when no `coverage_gaps` are recorded |
+| `coverage_complete` | boolean | True exactly when both gaps and exclusions are empty |
 | `files_inspected` | integer | Successfully read and decoded supported files |
+| `files_encountered` | integer | Files encountered before stopping, including unsupported files |
+| `bytes_read` | integer | Input bytes actually read, excluding policy bytes |
+| `scan_stopped` | boolean | Resource limit stopped traversal; ordinary skips alone leave false |
+| `limits` | object | Five effective limits, named as CLI flags with underscores |
+| `exclusions` | array | Intentionally skipped directories |
 | `findings` | array | Individual matches, not every executed check |
 | `coverage_gaps` | array | Skips, processing errors and file-count limit |
 
-Intentional `.git` and `__pycache__` exclusions do not create gaps. An empty directory can have `coverage_complete: true`, `files_inspected: 0`. Reports contain no timestamp, hostname, input-file hashes or policy hash; alone they do not establish which exact bytes were inspected.
+Intentional `.git` and `__pycache__` exclusions are listed in `exclusions`, with `asset_id` and `reason: excluded_directory`; they make coverage incomplete. If zero files are inspected, `empty_scope` is recorded, even when other gaps already exist. Reports contain no timestamp, hostname, input-file hashes or policy hash; alone they do not establish which exact bytes were inspected.
 
 ## Finding record
 
@@ -69,8 +88,12 @@ There are no individual `pass` or `not_applicable` records, asset aggregation or
 | `unreadable_or_invalid_utf8` | Read or UTF-8 error | Check permissions and encoding; do not automatically rewrite originals |
 | `directory_unreadable` | Directory traversal error | Review access; the record has no path |
 | `file_count_limit` | Encountered a file beyond the limit | Narrow scope or justify a limit change; traversal stopped |
+| `total_bytes_limit` | Aggregate read budget exhausted | Narrow the prepared copy; inspect the remainder separately |
+| `finding_count_limit` | A further match would exceed retained findings | Resolve existing findings and rerun; output is partial |
+| `directory_count_limit` | Directory traversal/fanout budget exceeded | Narrow the directory tree |
+| `empty_scope` | No supported file successfully inspected | Correct scope or inspect formats another way |
 
-The last two reasons omit `asset_id`. Integrations must handle its absence instead of assuming the key is mandatory.
+`directory_unreadable`, `file_count_limit`, `directory_count_limit` and `empty_scope` omit `asset_id`. Integrations must handle its absence instead of assuming the key is mandatory.
 
 ## Startup error
 
@@ -83,6 +106,10 @@ This is a different object without normal report fields. Check `error` first, th
 ## Privacy and retention
 
 Match redaction reduces value disclosure, but paths remain readable. Before external sharing, replace identifying filenames or share aggregate counts only. Retention, access and deletion are organization workflow decisions; the scanner does not manage them.
+
+## Migration from 0.1
+
+Require `schema_version: 0.2` for the new fields. Do not fill missing 0.1 exclusions or counters with invented values. Empty input previously returned 0; now it returns 2. Excluded directories previously left coverage unchanged; now they make it incomplete. Findings still take code-1 priority. These deliberate changes prevent an empty or partially excluded tree being treated as a clean review. A schema file and standalone validator remain planned.
 
 ---
 
