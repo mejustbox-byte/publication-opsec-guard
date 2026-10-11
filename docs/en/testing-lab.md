@@ -8,7 +8,7 @@ From the repository root:
 python3 -m unittest discover -v
 ```
 
-Expect nine tests and `OK`. Tests use temporary directories and synthetic strings, not production infrastructure or actual secrets. The symlink test requires permission to create links; the specific Windows runner passed, but local Windows policies may differ.
+Expect 22 tests and `OK`. Tests use temporary directories and synthetic strings, not production infrastructure or actual secrets. The symlink test requires permission to create links; the specific Windows runner passed, but local Windows policies may differ.
 
 ## Verification layers
 
@@ -22,7 +22,7 @@ Expect nine tests and `OK`. Tests use temporary directories and synthetic string
 
 The current suite does not measure precision/recall. That requires a labeled positive/negative corpus, fixed rule version and TP/FP/FN/TN counts. Green CI cannot support a “100% accurate” claim.
 
-Dedicated inaccessible-directory, path-race, hardlink, aggregate-memory, Unicode-marker locale, closed-pipe and individual private-key-header tests remain incomplete.
+Dedicated inaccessible-directory, path-race, hardlink, aggregate-memory, closed-pipe and individual private-key-header tests remain incomplete.
 
 ## Adding a scenario
 

@@ -33,23 +33,23 @@ Do not inspect an entire home directory to review one document: it expands scope
 
 The core uses Python's standard library and needs no third-party packages. Inspection does not make network calls or repair files. File and directory names are sorted for predictable traversal.
 
-Defaults are **2,000,000 bytes per file** and **10,000 encountered files**. These are not a total memory bound: findings accumulate in a list and match count has no separate limit. Total input and finding limits are future hardening work.
+Defaults: 2,000,000 bytes per file, 10,000 encountered files, 50,000,000 total bytes read, 10,000 findings and 10,000 directories. These limits do not bound total process memory or runtime: `os.walk` enumerates immediate directory entries before checking fanout, and report/path lists remain in memory.
 
 Report paths are relative to the root. They may remain sensitive despite hidden matches. Describing the current output as fully anonymized would be inaccurate.
 
 ## 5. Support
 
-Supported extensions: `.txt`, `.md`, `.rst`, `.json`, `.yaml`, `.yml`, `.toml`, `.ini`, `.conf`, `.csv`, `.py`, `.ps1`, `.sh`, `.xml`, `.html`, `.env`; exact filename `Dockerfile` is recognized separately. YAML, JSON and HTML are inspected as text, not parsed semantically. A file named exactly `.env` has no `Path.suffix` and is currently skipped; `settings.env` is supported.
+Supported extensions: `.txt`, `.md`, `.rst`, `.json`, `.yaml`, `.yml`, `.toml`, `.ini`, `.conf`, `.csv`, `.py`, `.ps1`, `.sh`, `.xml`, `.html`, `.env`; exact filename `Dockerfile` is recognized separately. YAML, JSON and HTML are inspected as text, not parsed semantically. Exact `.env`, `settings.env` and `Dockerfile` are supported.
 
-`.git` and `__pycache__` directories are intentionally excluded. Their exclusion is not recorded as a coverage gap. Git history is not inspected.
+`.git` and `__pycache__` are recorded in `exclusions` and make coverage incomplete. Git history is not inspected.
 
 Unsupported: PDF, Office, images, OCR, archives, EXIF, IPv6, key validity and comprehensive token discovery. Tests have passed on Linux/Windows/macOS hosted runners; this does not establish every OS version, CPU architecture or network-filesystem scenario.
 
 ## 6. Alpha acceptance and future acceptance
 
-The alpha must detect synthetic indicators for five rules, omit their values from evidence and retain coverage gaps. The nine existing tests establish part of this behavior.
+The alpha must detect synthetic indicators for five rules, omit their values from evidence and retain coverage gaps. The current regression tests establish part of this behavior.
 
-A broader release still needs individual negative cases for every rule, inaccessible-directory testing, total-memory bounds, adversarial-tree tests and stricter policy validation. A green baseline CI does not establish those requirements.
+A broader release still needs individual negative cases for every rule, inaccessible-directory testing, total-memory bounds, adversarial-tree tests. A green baseline CI does not establish those requirements.
 
 ---
 

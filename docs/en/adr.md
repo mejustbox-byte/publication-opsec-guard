@@ -4,7 +4,7 @@ Each decision describes context, choice and consequences. Status refers to the c
 
 ## ADR-001 — Python standard library
 
-**Status:** accepted for 0.1.0a1.
+**Status:** accepted for 0.2.0a1.
 
 **Context:** a portable CLI needs text reading, regexes, IP validation and JSON. A complex service runtime is unnecessary.
 
@@ -40,9 +40,9 @@ Each decision describes context, choice and consequences. Status refers to the c
 
 **Context:** unsupported files cannot be classified safe; read errors should not hide other results.
 
-**Decision:** retain `coverage_gaps`; return 1 for findings, otherwise 2 for gaps, otherwise 0. File-count exhaustion stops traversal.
+**Decision:** retain `coverage_gaps`; return 1 for findings, otherwise 2 for incomplete coverage, otherwise 0. File-count exhaustion stops traversal.
 
-**Consequences:** consumers must read JSON rather than only the exit code. Intentional exclusions are not gaps and must be interpreted through scope and documentation.
+**Consequences:** consumers must read JSON rather than only the exit code. Intentional exclusions are separate records and make coverage incomplete; empty input records `empty_scope`.
 
 ## ADR-005 — validate parsers before adding formats
 

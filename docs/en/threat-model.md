@@ -18,9 +18,9 @@ Assume execution on an isolated copy with access limited to necessary users. The
 | TM-02 | User/key disclosure | PUB-003/PUB-004 | No comprehensive secret detector; a header does not prove a real key |
 | TM-03 | Project-name disclosure | PUB-005 | Requires correct local policy |
 | TM-04 | Input points outside the tree | Symlinks skipped; available `O_NOFOLLOW` | Parent replacement and hardlinks are not fully prevented |
-| TM-05 | Memory/CPU exhaustion | Per-file and file-count limits | Total memory and finding count lack separate bounds |
+| TM-05 | Memory/CPU exhaustion | File, total-byte, finding and directory budgets | Total process memory and runtime remain unbounded |
 | TM-06 | Disclosure through reports | No raw match in evidence | `asset_id`, counts and rule names remain |
-| TM-07 | Error interpreted as success | `coverage_gaps`, code 2 without findings | Code 1 can also include gaps; empty input returns 0 |
+| TM-07 | Error interpreted as success | `coverage_gaps`, code 2 without findings | Code 1 can also include gaps; empty input returns 2 |
 | TM-08 | False full-audit claim | Scope field and documented limits | A consumer may disregard limits |
 
 ## Trust boundaries
