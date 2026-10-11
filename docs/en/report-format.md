@@ -2,14 +2,14 @@
 
 ## Purpose
 
-Reports support local review and publication-pipeline integration. The current format is a plain JSON object; a separate JSON Schema validator is not shipped. Do not assume fields from the future shared OPSEC contract already exist here.
+Reports support local review and publication-pipeline integration. The format is a JSON object with a bundled [Draft 2020-12 schema](../../schemas/response-0.2.schema.json) and [standalone validator](report-validation.md). Do not assume fields from the future shared OPSEC contract already exist here.
 
 ## Finding example
 
 ```json
 {
   "schema_version": "0.2",
-  "tool_version": "0.2.0a1",
+  "tool_version": "0.2.0a2",
   "scope": "utf8-text-only",
   "coverage_complete": true,
   "files_inspected": 1,
@@ -48,7 +48,7 @@ Reports support local review and publication-pipeline integration. The current f
 | Field | Type | Meaning |
 |---|---|---|
 | `schema_version` | string | Result shape version; currently `0.2` |
-| `tool_version` | string | Implementation version; currently `0.2.0a1` |
+| `tool_version` | string | Implementation version; currently `0.2.0a2` |
 | `scope` | string | `utf8-text-only`; bounds interpretation |
 | `coverage_complete` | boolean | True exactly when both gaps and exclusions are empty |
 | `files_inspected` | integer | Successfully read and decoded supported files |
@@ -109,7 +109,7 @@ Match redaction reduces value disclosure, but paths remain readable. Before exte
 
 ## Migration from 0.1
 
-Require `schema_version: 0.2` for the new fields. Do not fill missing 0.1 exclusions or counters with invented values. Empty input previously returned 0; now it returns 2. Excluded directories previously left coverage unchanged; now they make it incomplete. Findings still take code-1 priority. These deliberate changes prevent an empty or partially excluded tree being treated as a clean review. A schema file and standalone validator remain planned.
+Require `schema_version: 0.2` for the new fields. Do not fill missing 0.1 exclusions or counters with invented values. Empty input previously returned 0; now it returns 2. Excluded directories previously left coverage unchanged; now they make it incomplete. Findings still take code-1 priority. These deliberate changes prevent an empty or partially excluded tree being treated as a clean review. A schema file and standalone validator are now delivered; cross-field consistency requires the validator in addition to structural schema checks.
 
 ---
 

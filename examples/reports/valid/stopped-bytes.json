@@ -1,0 +1,30 @@
+{
+  "schema_version": "0.2",
+  "tool_version": "0.2.0a2",
+  "scope": "utf8-text-only",
+  "coverage_complete": false,
+  "files_inspected": 0,
+  "files_encountered": 1,
+  "bytes_read": 3,
+  "scan_stopped": true,
+  "limits": {
+    "max_bytes": 2000000,
+    "max_files": 10000,
+    "max_total_bytes": 3,
+    "max_findings": 10000,
+    "max_directories": 10000
+  },
+  "exclusions": [],
+  "findings": [],
+  "coverage_gaps": [
+    {
+      "status": "not_tested",
+      "reason": "total_bytes_limit",
+      "asset_id": "notes.md"
+    },
+    {
+      "status": "not_tested",
+      "reason": "empty_scope"
+    }
+  ]
+}

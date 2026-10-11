@@ -6,7 +6,7 @@
 
 Guard locates working addresses, internal domains, user paths, private-key headers and organization markers in prepared material. It identifies files and lines, retains uninspected objects and leaves publication decisions to the information owner.
 
-> **0.2.0a1 is a text-only alpha prototype.** PDF, Office, images, archives and Git history are not inspected. Exit code 0 does not guarantee the absence of secrets.
+> **0.2.0a2 is a text-only alpha prototype.** PDF, Office, images, archives and Git history are not inspected. Exit code 0 does not guarantee the absence of secrets.
 
 [Русский](README.ru.md) · [Full guide](docs/en/index.md) · [Rules](docs/en/rule-catalog.md) · [CLI](docs/en/cli-reference.md) · [Roadmap](docs/en/development-plan.md)
 
@@ -44,8 +44,12 @@ Python must be installed; no third-party packages are required. Write reports **
 
 Files use UTF-8 and a limited extension list; JSON/YAML are not parsed semantically. `.env` files, including exact filename `.env`, are inspected. `.git` and `__pycache__` are excluded and recorded; coverage is incomplete. Raw matches are hidden, filenames remain. Total memory lacks a separate limit; use isolated copies for untrusted trees.
 
+## Validate a saved report
+
+The optional [report validator](docs/en/report-validation.md) checks the bundled schema and coverage/budget consistency. Install its pinned dependencies using `python3 -m pip install -r requirements-validation.txt`, then run `python3 validate_report.py report.json`. Exit codes 0/1/2 retain scanner meaning; invalid input or unavailable validation returns 3. Validation does not authenticate the source or approve publication.
+
 ## Verification and documentation
 
-All 22 tests passed in [CI](https://github.com/mejustbox-byte/publication-opsec-guard/actions/runs/38155720812) on Linux, Windows and macOS. The [matrix](docs/en/check-matrix.md) documents the tested implementation head and limits of this evidence.
+The earlier scanner subset of 22 tests passed in [CI](https://github.com/mejustbox-byte/publication-opsec-guard/actions/runs/38155720812) on Linux, Windows and macOS. The [matrix](docs/en/check-matrix.md) documents the tested implementation head and limits of this evidence.
 
 Start with the [documentation index](docs/en/index.md): requirements, threats, architecture, ADR, rules, CLI/policy, JSON, troubleshooting, tests and milestones. [Release notes](docs/en/release-notes.md) describe actual status; the alpha release remains a draft.

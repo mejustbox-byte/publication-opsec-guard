@@ -15,7 +15,9 @@
 ## Проверки перед PR
 
 ```bash
+python3 -m pip install -r requirements-validation.txt
 python3 -m unittest discover -v
+python3 check_docs.py
 python3 guard.py --help
 git diff --check
 ```

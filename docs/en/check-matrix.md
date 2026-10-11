@@ -8,7 +8,7 @@
 | PUB-002: .local/.internal | `RULES` regex | `test_all_rules_and_redaction` | No dedicated negative/boundary-name corpus |
 | PUB-003: home paths | `RULES` regex | `test_all_rules_and_redaction` | Test uses Linux path; separate macOS/Windows representations are not covered |
 | PUB-004: key headers | `RULES` regex | `test_all_rules_and_redaction` | Not every header variant has a dedicated test |
-| PUB-005: markers | `re.escape`, `re.I` | `test_all_rules_and_redaction`, `test_marker_is_literal` | No separate duplicate/policy-encoding tests |
+| PUB-005: markers | `re.escape`, `re.I` | `test_all_rules_and_redaction`, `test_marker_is_literal` | Duplicate and UTF-8 policy regressions exist; broader representation accuracy remains unmeasured |
 
 ## Processing and interface
 
@@ -16,7 +16,7 @@
 |---|---|---|---|
 | Hidden values | `test_all_rules_and_redaction` | Four synthetic values absent from serialization | Full path/context anonymization |
 | Clean text | `test_clean` | Empty findings without gaps | Absence of all possible secrets |
-| Symlink/format | `test_symlink_and_unsupported` | Two coverage gaps | Parent races, hardlinks or full permission matrix |
+| Symlink/format | `test_symlink_and_unsupported` | Symlink/format gaps plus empty scope | Parent races, hardlinks or full permission matrix |
 | Size/encoding/NUL | `test_size_encoding_and_binary` | Three files produce gaps | Every decoding/permission failure |
 | File limit | `test_file_limit` | `file_count_limit` occurs | Aggregate resource ceiling |
 | CLI | `test_exit_codes_and_invalid_policy` | Codes 0/1/2, empty marker, zero limit | Every malformed policy or stdout failure |
@@ -40,11 +40,25 @@ This establishes a specific test suite on hosted runners. It does not replace us
 | Location | `test_newline_line_numbers` | Repeated markers report correct lines |
 | CLI | `test_cli_empty_unknown_utf8_and_limits` | Empty scope, Cyrillic policy, typo and budget exit behavior |
 
-The suite now contains 22 test methods. These tests verify behavior on synthetic inputs, not exhaustive rule accuracy, race resistance or bounded process memory.
+The scanner subset contains 22 test methods. These tests verify behavior on synthetic inputs, not exhaustive rule accuracy, race resistance or bounded process memory.
 
-## Current implementation verification
+## Previous hardening verification
 
 All 22 tests passed on Linux, Windows and macOS with Python 3.13 in [run 38155720812](https://github.com/mejustbox-byte/publication-opsec-guard/actions/runs/38155720812) at implementation head `197f07d563b25193c86ab011e8bfd0798e005bc1`. Documentation links, language parity and the user-guide example were checked locally.
+
+## Contract and consumer validation
+
+| Requirement | Supporting tests | Evidence and limit |
+|---|---|---|
+| Standards-based schema | `test_schema_and_labeled_fixtures` | Schema meta-validation; 15 labeled responses; no claim of full detection corpus |
+| Producer compatibility | `test_live_scanner_outputs` | Actual empty/.env/budget/encoding/tree responses accepted |
+| Strict structure | `test_required_fields_and_unknown_envelopes`, `test_schema_types_and_unknown_fields`, `test_finding_shape_redaction_and_static_rule_mapping`, `test_gap_assets_and_unknown_reasons` | Missing/unknown fields, booleans, static rules, raw evidence and gap assets rejected |
+| Internal consistency | `test_coverage_and_empty_scope_consistency`, `test_stop_state_consistency`, `test_budget_and_counter_consistency` | Coverage, counters and stop invariants; source authenticity remains unproven |
+| Resource/input checks | `test_error_cap_and_numeric_integer_semantics`, `test_strict_json_and_read_boundaries`, `test_symlink_and_special_file_rejection` | Error/read/depth limits and strict JSON; no total-process sandbox |
+| Safe execution | `test_no_network_during_validation`, `test_cli_result_codes_and_safe_errors`, `test_unavailable_schema_fails_closed` | No network attempt for bundled schema; codes 0–3; absent dependency/schema never succeeds |
+| Bilingual examples | `check_docs.py` | Local links, 17 page pairs, command parity and executable scanner/validator examples |
+
+The full suite contains 37 methods. See [validator guide](report-validation.md) for exact consumer semantics.
 
 ---
 

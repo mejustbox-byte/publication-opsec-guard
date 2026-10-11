@@ -39,7 +39,13 @@ Byte and finding budgets bound those quantities, not total process memory or run
 
 ## Development direction
 
-Separating loader, pure checks and serialization, adding contract validation are planned. This is a target architecture, not a claim that those modules exist. Changes must retain errors and must never convert missing data into success.
+Separating the scanner loader, pure checks and serialization is planned; response contract validation is delivered separately. This is a target architecture, not a claim that those modules exist. Changes must retain errors and must never convert missing data into success.
+
+## Report consumer boundary
+
+`validate_report.py` reads a bounded regular report, checks UTF-8/strict JSON/depth, validates local Draft 2020-12 structure and then applies producer invariants. It serializes a small validation result without input values. `asset_id` remains an opaque label; the consumer never reopens source files. External schema retrieval is denied. Optional dependencies are confined to validation; scanner execution remains standard-library-only.
+
+`check_docs.py` validates paired pages and local links, executes synthetic examples and validates their emitted reports. CI installs the optional environment, checks dependencies, runs 37 tests and then documentation checks on three hosted OS runners.
 
 ---
 

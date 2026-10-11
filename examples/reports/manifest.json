@@ -1,0 +1,95 @@
+{
+  "contract": "0.2",
+  "cases": [
+    {
+      "path": "valid/empty.json",
+      "valid": true,
+      "scanner_exit_code": 2,
+      "purpose": "No supported files inspected"
+    },
+    {
+      "path": "valid/clean.json",
+      "valid": true,
+      "scanner_exit_code": 0,
+      "purpose": "Complete coverage without findings"
+    },
+    {
+      "path": "valid/excluded.json",
+      "valid": true,
+      "scanner_exit_code": 2,
+      "purpose": "Intentional directory exclusion"
+    },
+    {
+      "path": "valid/incomplete.json",
+      "valid": true,
+      "scanner_exit_code": 2,
+      "purpose": "Unsupported format is not a pass"
+    },
+    {
+      "path": "valid/findings.json",
+      "valid": true,
+      "scanner_exit_code": 1,
+      "purpose": "All five rule classes; no raw matches"
+    },
+    {
+      "path": "valid/stopped-findings.json",
+      "valid": true,
+      "scanner_exit_code": 1,
+      "purpose": "Findings take precedence over incomplete coverage"
+    },
+    {
+      "path": "valid/stopped-bytes.json",
+      "valid": true,
+      "scanner_exit_code": 2,
+      "purpose": "Byte budget leaves this file uninspected"
+    },
+    {
+      "path": "valid/startup-error.json",
+      "valid": true,
+      "scanner_exit_code": 2,
+      "purpose": "Startup error is a recognized non-success response"
+    },
+    {
+      "path": "invalid/unknown-field.json",
+      "valid": false,
+      "scanner_exit_code": null,
+      "purpose": "Unknown fields rejected"
+    },
+    {
+      "path": "invalid/old-version.json",
+      "valid": false,
+      "scanner_exit_code": null,
+      "purpose": "No silent migration of old contracts"
+    },
+    {
+      "path": "invalid/boolean-counter.json",
+      "valid": false,
+      "scanner_exit_code": null,
+      "purpose": "Boolean is not an integer counter"
+    },
+    {
+      "path": "invalid/false-clean.json",
+      "valid": false,
+      "scanner_exit_code": null,
+      "purpose": "Clean coverage contradicts exclusions"
+    },
+    {
+      "path": "invalid/stop-mismatch.json",
+      "valid": false,
+      "scanner_exit_code": null,
+      "purpose": "Stop flag requires a resource-limit gap"
+    },
+    {
+      "path": "invalid/counter-mismatch.json",
+      "valid": false,
+      "scanner_exit_code": null,
+      "purpose": "Inspected exceeds encountered"
+    },
+    {
+      "path": "invalid/raw-evidence.json",
+      "valid": false,
+      "scanner_exit_code": null,
+      "purpose": "Raw evidence fields are forbidden"
+    }
+  ]
+}

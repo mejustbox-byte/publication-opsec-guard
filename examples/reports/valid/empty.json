@@ -1,0 +1,25 @@
+{
+  "schema_version": "0.2",
+  "tool_version": "0.2.0a2",
+  "scope": "utf8-text-only",
+  "coverage_complete": false,
+  "files_inspected": 0,
+  "files_encountered": 0,
+  "bytes_read": 0,
+  "scan_stopped": false,
+  "limits": {
+    "max_bytes": 2000000,
+    "max_files": 10000,
+    "max_total_bytes": 50000000,
+    "max_findings": 10000,
+    "max_directories": 10000
+  },
+  "exclusions": [],
+  "findings": [],
+  "coverage_gaps": [
+    {
+      "status": "not_tested",
+      "reason": "empty_scope"
+    }
+  ]
+}

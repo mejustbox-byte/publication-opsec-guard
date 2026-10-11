@@ -28,10 +28,12 @@ Do not inspect an entire home directory to review one document: it expands scope
 | FR-05 | Account for uninspected objects | `coverage_gaps` records skip reasons; gaps are not passes |
 | FR-06 | Machine-readable output | JSON on stdout and exit codes 0/1/2 |
 | FR-07 | Organization policy | Optional JSON list of literal `markers` |
+| FR-08 | Validate an existing response | Optional local schema and consistency checks; validator codes 0/1/2/3 |
+| FR-09 | Reproduce documentation checks | `check_docs.py`: paired pages, links and executable examples |
 
 ## 4. Nonfunctional properties and limitations
 
-The core uses Python's standard library and needs no third-party packages. Inspection does not make network calls or repair files. File and directory names are sorted for predictable traversal.
+The scanner core uses Python's standard library and needs no third-party packages. The optional report validator has a separate version-pinned dependency environment. Inspection does not make network calls or repair files. File and directory names are sorted for predictable traversal.
 
 Defaults: 2,000,000 bytes per file, 10,000 encountered files, 50,000,000 total bytes read, 10,000 findings and 10,000 directories. These limits do not bound total process memory or runtime: `os.walk` enumerates immediate directory entries before checking fanout, and report/path lists remain in memory.
 

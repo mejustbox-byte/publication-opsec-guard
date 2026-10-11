@@ -1,0 +1,38 @@
+{
+  "schema_version": "0.2",
+  "tool_version": "0.2.0a2",
+  "scope": "utf8-text-only",
+  "coverage_complete": false,
+  "files_inspected": 1,
+  "files_encountered": 1,
+  "bytes_read": 88,
+  "scan_stopped": true,
+  "limits": {
+    "max_bytes": 2000000,
+    "max_files": 10000,
+    "max_total_bytes": 50000000,
+    "max_findings": 1,
+    "max_directories": 10000
+  },
+  "exclusions": [],
+  "findings": [
+    {
+      "check_id": "PUB-001",
+      "asset_id": "notes.md",
+      "status": "fail",
+      "severity": "high",
+      "evidence": {
+        "line": 1,
+        "redacted": true
+      },
+      "remediation": "Replace internal addresses with documentation addresses."
+    }
+  ],
+  "coverage_gaps": [
+    {
+      "status": "not_tested",
+      "reason": "finding_count_limit",
+      "asset_id": "notes.md"
+    }
+  ]
+}

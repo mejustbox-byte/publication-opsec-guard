@@ -1,3 +1,15 @@
+# Alpha 0.2.0a2: report validation
+
+## Delivered
+
+- Bundled Draft 2020-12 response schema covering report and startup-error envelopes.
+- Optional offline validator with cross-field consistency and scanner-preserving codes 0/1/2; invalid/unavailable validation returns 3.
+- Strict UTF-8 JSON loader: duplicate keys, non-JSON constants, symlinks, special files, size and depth limits.
+- Safe capped diagnostics, 15 labeled synthetic responses, 15 validator tests and automated documentation checks.
+- Detailed Russian/English integration, installation, examples, troubleshooting and limitations.
+
+The report version remains 0.2 because its shape is unchanged. Tool version is 0.2.0a2. The scanner behavior is unchanged from a1 apart from the exposed tool version. Full tests now require optional validator dependencies; scanner-only tests do not. Report validation does not authenticate source bytes or establish publication safety. No GitHub release/tag is published by these code changes.
+
 # Alpha 0.2.0a1 status
 
 ## Changes in 0.2.0a1
@@ -33,7 +45,7 @@ Documentation now separates actual implementation from plans: navigation, step-b
 
 Code is in the public repository; the GitHub alpha release is prepared as a draft. A release-notes file does not imply a published release. Close the listed development-plan limitations before relying on it as the sole publication control.
 
-## Current implementation verification
+## Previous hardening verification
 
 All 22 tests passed on Linux, Windows and macOS with Python 3.13 in [run 38155720812](https://github.com/mejustbox-byte/publication-opsec-guard/actions/runs/38155720812) at implementation head `197f07d563b25193c86ab011e8bfd0798e005bc1`. Documentation links, language parity and the user-guide example were checked locally.
 
