@@ -60,6 +60,10 @@ All 22 tests passed on Linux, Windows and macOS with Python 3.13 in [run 3815572
 
 The full suite contains 37 methods. See [validator guide](report-validation.md) for exact consumer semantics.
 
+## Current verification: 0.2.0a2
+
+All 37 test methods, `pip check` and `check_docs.py` passed on Linux, Windows and macOS with Python 3.13 in [run 38156874002](https://github.com/mejustbox-byte/publication-opsec-guard/actions/runs/38156874002) at implementation/documentation head `5fb0da0e6f67e2898b4cb1877cb68ae76a0e8f9b`. The run verifies dependency installation, 17 RU/EN page pairs and executable examples; it does not establish Intel Mac compatibility or source authenticity.
+
 ---
 
 [Documentation index](index.md) · [Русский](../ru/check-matrix.md)
