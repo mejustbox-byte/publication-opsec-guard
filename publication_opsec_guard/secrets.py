@@ -104,7 +104,7 @@ def inspect(directory, binary, digest, policy=None, timeout=30):
                 version = stream.read(257).decode('ascii', errors='replace').strip()
             if result.returncode != 0 or version != ENGINE_VERSION:
                 return gap('engine_version_mismatch')
-            snapshot = work / 'material'; snapshot.mkdir()
+            snapshot = work / 'material'; snapshot.mkdir(); snapshot = snapshot.resolve()
             count, total = snapshot_text(root, snapshot, response['text_report']['limits'])
             if (count != response['text_report']['files_inspected'] or
                     total != response['text_report']['bytes_read']):
@@ -117,7 +117,7 @@ def inspect(directory, binary, digest, policy=None, timeout=30):
                     '--gitleaks-ignore-path', str(ignore), '--ignore-gitleaks-allow',
                     '--redact=100', '--no-banner', '--no-color', '--log-level', 'error',
                     '--exit-code', '10', '--report-format', 'json', '--report-path', str(report),
-                    '--max-archive-depth', '0', '--max-decode-depth', '0', '--timeout', str(timeout)]
+                    '--max-decode-depth', '0']
             result = subprocess.run(args, cwd=work, env=env, stdout=subprocess.DEVNULL,
                                     stderr=subprocess.DEVNULL, timeout=timeout)
             if result.returncode not in (0, 10):

@@ -22,7 +22,7 @@ publication-opsec-secrets prepared-materials --gitleaks /absolute/path/gitleaks 
 2. If coverage is incomplete, do not launch the engine; report `incomplete_text_scope`.
 3. Require an absolute regular executable, exact SHA-256 and version output `8.24.2`.
 4. Copy the inspected UTF-8 file tree into a private temporary directory, rechecking regular files, symlinks, file count, per-file/total byte limits and counters.
-5. Use an explicit temporary config extending the pinned engine defaults, an empty ignore file and `--ignore-gitleaks-allow`; strip inherited GITLEAKS_* variables. Disable archive traversal and decoding. Inspection uses directory mode, not Git history.
+5. Use an explicit temporary config extending the pinned engine defaults, an empty ignore file and `--ignore-gitleaks-allow`; strip inherited GITLEAKS_* variables. Archive files are rejected by the text preflight; decoding is disabled. Inspection uses directory mode, not Git history.
 6. Discard engine stdout/stderr, request redaction and JSON, and use finding exit code 10 so ordinary engine errors are not confused with findings.
 7. Load at most 4,000,000 report bytes with strict JSON checks and depth 64; accept at most 10,000 findings. Require exit-code/report agreement. Convert only rule ID, relative file and positive line number; discard Secret, Match, Line, Description, fingerprint, authors and other fields.
 8. Remove temporary data on normal cleanup and return the independent envelope.
