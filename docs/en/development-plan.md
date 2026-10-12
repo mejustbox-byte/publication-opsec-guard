@@ -39,3 +39,6 @@ After this project completes, the next independent cycle covers a shared OPSEC r
 ---
 
 [Documentation index](index.md) · [Русский](../ru/development-plan.md)
+
+
+M3 delivered: [54 labeled rule cases](rule-corpus.md), 38 test methods locally. Distribution and integrations remain planned.
