@@ -1,0 +1,27 @@
+name: Publication OPSEC Guard
+description: Read-only UTF-8 publication checks; nonzero results fail the step.
+inputs:
+  directory:
+    description: Prepared UTF-8 material directory in the caller workspace.
+    required: true
+  policy:
+    description: Optional local JSON policy path.
+    required: false
+    default: ''
+  report:
+    description: New report path outside the inspected directory.
+    required: true
+outputs:
+  exit-code:
+    description: Scanner code 0, 1 or 2; nonzero fails the Action.
+    value: ${{ steps.inspect.outputs.exit-code }}
+runs:
+  using: composite
+  steps:
+    - id: inspect
+      shell: bash
+      env:
+        GUARD_DIRECTORY: ${{ inputs.directory }}
+        GUARD_POLICY: ${{ inputs.policy }}
+        GUARD_REPORT: ${{ inputs.report }}
+      run: python3 "$GITHUB_ACTION_PATH/run_integration.py"

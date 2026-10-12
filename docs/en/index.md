@@ -36,3 +36,5 @@ All examples are synthetic. Production exports, secrets, internal organization n
 - [ Synthetic rule corpus](rule-corpus.md)
 
 - [Installation and distribution](installation.md)
+
+- [CI and pre-commit integrations](integrations.md)

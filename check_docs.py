@@ -44,7 +44,7 @@ def main():
             if not target.startswith(('https://', 'http://', '#')):
                 assert (file.parent / target.split('#')[0]).is_file(), f'Broken link: {file.name}'
     for name in ru:
-        pattern = r'```(?:bash|json|text|mermaid)?\n(.*?)```'
+        pattern = r'```(?:bash|json|text|mermaid|yaml)?\n(.*?)```'
         a = (ROOT / 'docs/ru' / name).read_text(encoding='utf-8')
         b = (ROOT / 'docs/en' / name).read_text(encoding='utf-8')
         assert name == 'architecture.md' or re.findall(pattern, a, re.S) == re.findall(pattern, b, re.S), name

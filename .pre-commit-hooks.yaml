@@ -1,0 +1,8 @@
+- id: publication-opsec-guard
+  name: Publication OPSEC Guard (prepared directory)
+  entry: publication-opsec-guard
+  language: python
+  language_version: python3
+  pass_filenames: false
+  always_run: true
+  description: Set args to an explicit prepared directory; nonzero findings or coverage gaps block the commit.
