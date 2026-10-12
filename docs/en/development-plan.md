@@ -2,7 +2,7 @@
 
 ## Current state
 
-The 0.2.0a2 text alpha has five rules, contract 0.2 and 37 test methods. M1 and M2 are implemented. M2 delivers a bundled schema, standalone validator, labeled response fixtures and automated bilingual-document checks; the remaining milestones below are planned.
+The 0.2.0a2 text alpha has five rules, contract 0.2 and 38 test methods. M1, M2 and M3 are implemented. M2 delivers a bundled schema, standalone validator, labeled response fixtures and automated bilingual-document checks; M4–M6 remain planned.
 
 ## Milestones
 
@@ -10,7 +10,7 @@ The 0.2.0a2 text alpha has five rules, contract 0.2 and 37 test methods. M1 and 
 |---|---|---|---|
 | M1: implemented | Explicit UTF-8 policy, strict fields, exact `.env`, aggregate limits | CLI and regression tests | Policy typos are not silent; exhausted limits produce gaps, not success |
 | M2: implemented | Versioned schema, explicit exclusions and empty-input handling | Schema, validator, updated RU/EN examples | Consumer distinguishes startup error, empty scope and result |
-| M3: rule quality | Positive/negative/boundary cases per ID | Labeled synthetic corpus | Every claimed representation has a test; measurements are published without inflation |
+| M3: implemented | Positive/negative/boundary cases per ID | Labeled synthetic corpus | Every claimed representation has a test; measurements are published without inflation |
 | M4: distribution | CLI packaging, fixed dependencies, reproducible build | Installation artifact and guide | Installation verified in a clean environment; report exposes version |
 | M5: integrations | CI example, pre-commit, specialist secret-scanner adapter | Failure/missing-engine tests | External engine failures remain visible; raw secrets are not emitted |
 | M6: documents | One format per subcycle after a justified selection | Parser, limits, corpus and threat model | Unsupported attachments and failures remain visible |
