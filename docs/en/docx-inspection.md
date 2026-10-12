@@ -57,7 +57,7 @@ The scanner reads the ZIP into bounded memory, keeps bounded XML trees and uses 
 | extracted_text_incomplete | The existing scanner could not fully inspect extracted text |
 | invalid_input_policy_or_package | Input, policy, ZIP reading or finding cap failed |
 
-Findings can coexist with gaps. Review both arrays. Images are never marked clean because their surrounding XML is readable. External hyperlinks can be legitimate, but external content coverage remains unavailable. DOCM, legacy DOC, PDF, XLSX/PPTX, image metadata/OCR and arbitrary ZIP files remain unsupported.
+Findings can coexist with gaps. Review both arrays. Images are never marked clean because their surrounding XML is readable. External hyperlinks can be legitimate, but external content coverage remains unavailable. DOCM, legacy DOC, PDF, XLSX, image metadata/OCR and arbitrary ZIP files remain unsupported.
 
 ## Response schema
 
