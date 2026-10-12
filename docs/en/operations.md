@@ -20,7 +20,7 @@ python3 guard.py prepared-materials --policy policy.local.json > report.json
 
 Most CI shells fail a step on a nonzero exit code. Code 1 requires finding review; code 2 requires coverage/input review. Do not append `|| true` merely to continue publication. To retain a report after failure, configure a later artifact-retention step and preserve the original inspection exit code.
 
-The supplied `Tests` workflow tests the product; it **does not automatically inspect every consumer's material**. There is no shipped composite Action or pre-commit hook yet. Do not execute untrusted PR code with secrets or privileges merely to add this step.
+The supplied `Tests` workflow tests the product; it **does not automatically inspect every consumer's material**. A composite Action and pre-commit hook are supplied; see [integrations](integrations.md). Do not execute untrusted PR code with secrets or privileges merely to add this step.
 
 ## Troubleshooting
 

@@ -1,3 +1,7 @@
+# CI/pre-commit integration update
+
+Delivered composite Action, explicit-directory hook, safe Action runner and synthetic integration checks. Codes 1/2 fail the gate; Action retains a JSON report outside scope and does not overwrite existing files. Tool version remains 0.2.0a3, contract 0.2; scanner rules are unchanged. Specialist adapter remains unimplemented. See [integration guide](integrations.md).
+
 # Alpha 0.2.0a3: installable CLI
 
 Wheel packaging, two console commands, bundled schema data, optional validation dependencies and clean-environment installation checks are delivered. Scanner-only installation remains dependency-free. Source launchers require the adjacent package. Contract remains 0.2. Build verification compares two wheel hashes at fixed epoch; independent cross-platform reproducibility and PyPI publication are not claimed. See [installation](installation.md).

@@ -36,3 +36,5 @@ Publication OPSEC Guard помогает проверить подготовле
 - [ Синтетический корпус правил](rule-corpus.md)
 
 - [Установка и поставка](installation.md)
+
+- [Интеграции CI и pre-commit](integrations.md)

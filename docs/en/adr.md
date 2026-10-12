@@ -74,3 +74,8 @@ Each decision describes context, choice and consequences. Status refers to the c
 ## ADR-007 — installable offline CLI
 
 Accepted for 0.2.0a3. Use setuptools with explicit packages and console entry points; retain source launchers. Bundle schema data separately and keep validator dependencies optional. Build twice at a fixed epoch and test installation outside the checkout. This adds packaging evidence, not PyPI publication or fully hash-locked builds. See [installation](installation.md).
+
+
+## ADR-008 — explicit-scope publication gates
+
+Accepted. A composite Action runs checked-in Python through literal environment inputs and retains a new external report. A pre-commit hook scans an explicit directory with pass_filenames disabled and always_run enabled. Both propagate nonzero status. External secret engines remain a separate adapter decision; they are not silently optional successful checks. See [integrations](integrations.md).
