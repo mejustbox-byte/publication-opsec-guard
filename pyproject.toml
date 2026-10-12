@@ -4,9 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "publication-opsec-guard"
-version = "0.2.0a6"
+version = "0.3.0a1"
 description = "Offline read-only publication disclosure checks for UTF-8 text"
 readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
 requires-python = ">=3.12"
 authors = [{name = "Publication OPSEC Guard contributors"}]
 dependencies = []
@@ -21,6 +23,8 @@ publication-opsec-validate = "publication_opsec_guard.validate_report:main"
 publication-opsec-secrets = "publication_opsec_guard.secrets:main"
 
 publication-opsec-documents = "publication_opsec_guard.documents:main"
+
+publication-opsec-inspect = "publication_opsec_guard.bundle:main"
 
 [tool.setuptools]
 packages = ["publication_opsec_guard", "publication_opsec_guard_schemas"]

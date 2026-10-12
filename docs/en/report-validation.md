@@ -119,3 +119,8 @@ The full suite contains 37 test methods: 22 scanner tests and 15 validator tests
 ---
 
 [Documentation index](index.md) · [Русский](../ru/report-validation.md)
+
+
+## Extended response dispatch
+
+From 0.3.0a1 the same CLI also accepts document, secret and aggregate envelopes. See [all-report validation](all-report-validation.md) for the complete current dispatch and additional invariants. The core-contract reference above remains valid.

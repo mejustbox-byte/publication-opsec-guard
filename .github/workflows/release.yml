@@ -1,0 +1,36 @@
+name: Release artifacts
+on:
+  release:
+    types: [published]
+permissions:
+  contents: read
+jobs:
+  artifacts:
+    if: github.event.release.prerelease
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.release.tag_name }}
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - run: python -m pip install -r requirements-validation.txt
+      - run: python -m pip install setuptools==84.0.0 wheel==0.48.0
+      - run: python -m unittest discover -v
+      - run: python check_docs.py
+      - run: python verify_install.py
+      - run: python -m pip wheel --no-build-isolation --no-deps --wheel-dir dist .
+      - run: python -c "from setuptools.build_meta import build_sdist; build_sdist('dist')"
+      - name: Checksums and upload
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          set -euo pipefail
+          cd dist
+          sha256sum *.whl *.tar.gz > SHA256SUMS
+          gh release upload "$RELEASE_TAG" *.whl *.tar.gz SHA256SUMS --repo "$GITHUB_REPOSITORY"

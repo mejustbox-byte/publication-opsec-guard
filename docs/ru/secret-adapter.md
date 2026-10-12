@@ -31,7 +31,7 @@ publication-opsec-secrets prepared-materials --gitleaks /absolute/path/gitleaks 
 
 ## Контракт ответа: secrets-0.1
 
-Новый формат отделён от существующей схемы response-0.2. `publication-opsec-validate` принимает только основные ответы и отклоняет этот формат. CLI возвращает `schema_version`, `tool_version`, `engine`, `text_report`, `findings`. `text_report` — исходный полный отчёт или null при ошибке входа. `engine` содержит имя, требуемую версию, статус и причину; у завершённой проверки причина null. Находки секретов содержат `engine_rule`, `asset_id`, status fail и evidence с line/redacted=true. Имена файлов и ID правил остаются метаданными: ограничивайте доступ к отчётам.
+Новый формат отделён от существующей схемы response-0.2. `publication-opsec-validate` теперь поддерживает основные и расширенные ответы. CLI возвращает `schema_version`, `tool_version`, `engine`, `text_report`, `findings`. `text_report` — исходный полный отчёт или null при ошибке входа. `engine` содержит имя, требуемую версию, статус и причину; у завершённой проверки причина null. Находки секретов содержат `engine_rule`, `asset_id`, status fail и evidence с line/redacted=true. Имена файлов и ID правил остаются метаданными: ограничивайте доступ к отчётам.
 
 ## Состояния отказа
 
@@ -57,3 +57,5 @@ publication-opsec-secrets prepared-materials --gitleaks /absolute/path/gitleaks 
 ---
 
 [Documentation index](index.md) · [English](../en/secret-adapter.md)
+
+[Валидация всех форматов](all-report-validation.md) доступна с 0.3.0a1.

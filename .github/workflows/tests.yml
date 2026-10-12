@@ -67,3 +67,8 @@ jobs:
         env:
           GITLEAKS_TEST_BINARY: ${{ runner.temp }}/gitleaks-verified/gitleaks
         run: python verify_gitleaks.py
+      - name: Audit pinned validation dependencies
+        if: runner.os == 'Linux'
+        run: |
+          python -m pip install pip-audit==2.9.0
+          python -m pip_audit -r requirements-validation.txt --no-deps --disable-pip --format json

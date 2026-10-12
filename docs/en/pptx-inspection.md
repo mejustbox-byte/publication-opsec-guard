@@ -42,7 +42,7 @@ Images, embedded workbooks/OLE, audio, video and other non-XML payloads produce 
 | Invalid package reason | invalid_docx_package | invalid_ooxml_package |
 | All other fields | Original DOCX envelope | Same meanings and shapes |
 
-The new command emits 0.2 for both DOCX and PPTX. Keep consumers version-aware; do not silently accept an unknown scope. The old [schema](../../schemas/documents-0.1.schema.json) is retained for historic outputs; the [new schema](../../schemas/documents-0.2.schema.json) describes current outputs. The core response-0.2 and secret-adapter secrets-0.1 contracts are unchanged. The core validator still rejects document envelopes; schema validation checks shape, not source authenticity or semantic coverage.
+The new command emits 0.2 for both DOCX and PPTX. Keep consumers version-aware; do not silently accept an unknown scope. The old [schema](../../schemas/documents-0.1.schema.json) is retained for historic outputs; the [new schema](../../schemas/documents-0.2.schema.json) describes current outputs. The core response-0.2 and secret-adapter secrets-0.1 contracts are unchanged. The core validator now supports document envelopes; schema validation checks shape, not source authenticity or semantic coverage.
 
 ## Verification and use in publication workflows
 
@@ -53,3 +53,5 @@ Run this command as a separate gate for each prepared document. The existing Act
 ---
 
 [Documentation index](index.md) · [Русский](../ru/pptx-inspection.md)
+
+[All-report validation](all-report-validation.md) is supplied from 0.3.0a1.

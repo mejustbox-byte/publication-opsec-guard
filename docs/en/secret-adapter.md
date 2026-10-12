@@ -31,7 +31,7 @@ The preflight and snapshot are separate reads. Count/byte comparison detects som
 
 ## Response contract: secrets-0.1
 
-This new envelope is deliberately separate from the existing response-0.2 schema. `publication-opsec-validate` accepts core responses only and rejects this envelope. The CLI supplies `schema_version`, `tool_version`, `engine`, `text_report` and `findings`. `text_report` is a full original report or null on input failure. `engine` contains name, required version, status and reason; completed inspection has reason null. Secret findings contain `engine_rule`, `asset_id`, status fail and evidence with line/redacted=true. Filenames and rule IDs remain metadata, so keep reports access-controlled.
+This new envelope is deliberately separate from the existing response-0.2 schema. `publication-opsec-validate` accepts core responses only and now supports this envelope. The CLI supplies `schema_version`, `tool_version`, `engine`, `text_report` and `findings`. `text_report` is a full original report or null on input failure. `engine` contains name, required version, status and reason; completed inspection has reason null. Secret findings contain `engine_rule`, `asset_id`, status fail and evidence with line/redacted=true. Filenames and rule IDs remain metadata, so keep reports access-controlled.
 
 ## Failure states
 
@@ -57,3 +57,5 @@ The executable is trusted local code. Version/digest checks are not signature ve
 ---
 
 [Documentation index](index.md) · [Русский](../ru/secret-adapter.md)
+
+[All-report validation](all-report-validation.md) is supplied from 0.3.0a1.

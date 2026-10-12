@@ -1,67 +1,48 @@
 # Publication OPSEC Guard
 
-### Inspect text before publication
+**Local publication preflight · Read-only · Explicit coverage · MIT**
 
-**Local · Read-only · Five rules · JSON without raw matches**
+Inspect prepared material for internal addresses, naming, user paths, private-key headers, configured markers and selected Office identity metadata. Reports hide matched values and retain untested coverage. **0.3.0a1 is an alpha**, with a bounded declared scope.
 
-Guard locates working addresses, internal domains, user paths, private-key headers and organization markers in prepared material. It identifies files and lines, retains uninspected objects and leaves publication decisions to the information owner.
+[Русский](README.ru.md) · [Full handbook](docs/en/index.md) · [Unified runner](docs/en/unified-inspection.md) · [Release notes](docs/en/release-notes.md)
 
-> **0.2.0a6 is a text-only alpha prototype.** The core scanner is text-only. A separate bounded DOCX XML command is available; PDF, images, general archives and Git history are not inspected. Exit code 0 does not guarantee the absence of secrets.
+## Supported inspection
 
-[Русский](README.ru.md) · [Full guide](docs/en/index.md) · [Rules](docs/en/rule-catalog.md) · [CLI](docs/en/cli-reference.md) · [Roadmap](docs/en/development-plan.md)
+| Component | Delivered |
+|---|---|
+| UTF-8 text | Five disclosure rules, strict local naming policy, bounded file traversal |
+| DOCX/PPTX/XLSX | Bounded XML text and selected identity metadata; joined rich-text runs |
+| Optional Gitleaks | Pinned user-installed 8.24.2 binary/digest; text-only specialist inspection |
+| Unified runner | Mixed prepared directory, one aggregate report and explicit child states |
+| Report validator | Core, document, secret and aggregate schemas plus cross-field checks |
+| Integration | Text-only GitHub Action/pre-commit; mixed inspection through the unified CLI |
 
-## The problem it solves
+## Install and run
 
-Before publishing a README, issue or sanitized configuration, check for retained environment details. Guard performs a repeatable preliminary inspection of a local copy. Output locates a source line without duplicating its matched value in JSON.
-
-## Capabilities
-
-| Rule | Detects | Purpose |
-|---|---|---|
-| PUB-001 | RFC1918 IPv4 | Internal addressing disclosure |
-| PUB-002 | `.local` / `.internal` | Internal naming disclosure |
-| PUB-003 | `/home/`, `/Users/`, Windows home paths | Identifying usernames |
-| PUB-004 | Private-key headers | Possible private-key material |
-| PUB-005 | Literal policy markers | Organizational names and identifiers |
-
-## Quick start
+Use Python 3.12+ with current security patches; CI checks Python 3.13. From a reviewed checkout:
 
 ```bash
-git clone https://github.com/mejustbox-byte/publication-opsec-guard.git
-cd publication-opsec-guard
-python3 guard.py /path/to/prepared-text > report.json
+python3 -m venv .venv
+.venv/bin/python -m pip install '.[validation]'
+.venv/bin/publication-opsec-inspect prepared-materials > publication-report.json
+.venv/bin/publication-opsec-validate publication-report.json
 ```
 
-Python must be installed; no third-party packages are required. Write reports **outside the inspected directory**. On Windows replace `python3` with `python` or `py -3` if needed. The [user guide](docs/en/user-guide.md) contains a reproducible example with expected results.
+On Windows use `.venv\Scripts\python.exe` and `.venv\Scripts\publication-opsec-inspect.exe`. Keep reports and private policies outside the inspected directory. Install `.` without the extra for scanning alone. Release wheel/source artifacts and SHA256SUMS are supplied through GitHub Releases; PyPI publication is not provided.
 
 | Code | Meaning |
 |---|---|
-| 0 | No findings or recorded gaps; review file count and scope |
-| 1 | Findings exist; gaps may also exist |
-| 2 | Incomplete coverage without findings, or input/policy error |
+| 0 | No findings or recorded gaps in the declared scope |
+| 1 | Findings exist; incomplete coverage may also exist |
+| 2 | Incomplete coverage or input failure without findings |
+| 3 | Validator-only: invalid report or unavailable validation |
 
-## Important behavior
+## Alpha boundaries
 
-Files use UTF-8 and a limited extension list; JSON/YAML are not parsed semantically. `.env` files, including exact filename `.env`, are inspected. `.git` and `__pycache__` are excluded and recorded; coverage is incomplete. Raw matches are hidden, filenames remain. Total memory lacks a separate limit; use isolated copies for untrusted trees.
+PDF/OCR, general archives, embedded binaries/media and Office rendering are not inspected. Formulas are read as text, never calculated. Optional specialist secret inspection does not cover Office XML; requesting it leaves explicit document gaps. Actual Gitleaks execution is verified on Linux only. Zero is not a guarantee of no secrets or authorization to publish. Report paths remain identifying metadata.
 
-## Validate a saved report
+## Evidence and documentation
 
-The optional [report validator](docs/en/report-validation.md) checks the bundled schema and coverage/budget consistency. Install its pinned dependencies using `python3 -m pip install -r requirements-validation.txt`, then run `python3 validate_report.py report.json`. Exit codes 0/1/2 retain scanner meaning; invalid input or unavailable validation returns 3. Validation does not authenticate the source or approve publication.
+The suite includes 84 unittest methods, synthetic rule/package corpora, clean installation checks and executable RU/EN guide checks. Dependency audit evidence is point-in-time; pins are not signatures or a fully hash-locked supply chain. See [check matrix](docs/en/check-matrix.md), [XLSX](docs/en/xlsx-inspection.md), [all-envelope validation](docs/en/all-report-validation.md), [threat model](docs/en/threat-model.md) and [limitations](docs/en/development-plan.md).
 
-## Verification and documentation
-
-All 37 test methods, dependency checks and executable-documentation checks passed in [CI](https://github.com/mejustbox-byte/publication-opsec-guard/actions/runs/38156874002) on Linux, Windows and macOS. The [matrix](docs/en/check-matrix.md) records the tested head and limits of this evidence.
-
-Start with the [documentation index](docs/en/index.md): requirements, threats, architecture, ADR, rules, CLI/policy, JSON, troubleshooting, tests and milestones. [Release notes](docs/en/release-notes.md) describe actual status; the alpha release remains a draft.
-
-
-[Install the CLI package](docs/en/installation.md): core install `python3 -m pip install .`; optional validator `python3 -m pip install ".[validation]"`. PyPI publication is not claimed.
-
-
-[Optional Gitleaks adapter](docs/en/secret-adapter.md): separate command with explicit pinned binary/digest and unavailable-engine status.
-
-
-[DOCX inspection](docs/en/docx-inspection.md): XML text and selected metadata only; images/attachments remain untested.
-
-
-[PPTX inspection and document-contract migration](docs/en/pptx-inspection.md) are available in the document CLI; media and embedded files remain untested.
+Licensed under [MIT](LICENSE). The project does not upload documents or automatically repair them.
