@@ -1,0 +1,452 @@
+{
+  "format_version": "1",
+  "cases": [
+    {
+      "id": "PUB-001-001",
+      "rule": "PUB-001",
+      "category": "boundary",
+      "text": "10.0.0.0",
+      "markers": [],
+      "expected_count": 1
+    },
+    {
+      "id": "PUB-001-002",
+      "rule": "PUB-001",
+      "category": "boundary",
+      "text": "10.255.255.255",
+      "markers": [],
+      "expected_count": 1
+    },
+    {
+      "id": "PUB-001-003",
+      "rule": "PUB-001",
+      "category": "boundary",
+      "text": "172.16.0.0",
+      "markers": [],
+      "expected_count": 1
+    },
+    {
+      "id": "PUB-001-004",
+      "rule": "PUB-001",
+      "category": "boundary",
+      "text": "172.31.255.255",
+      "markers": [],
+      "expected_count": 1
+    },
+    {
+      "id": "PUB-001-005",
+      "rule": "PUB-001",
+      "category": "boundary",
+      "text": "192.168.0.0",
+      "markers": [],
+      "expected_count": 1
+    },
+    {
+      "id": "PUB-001-006",
+      "rule": "PUB-001",
+      "category": "boundary",
+      "text": "192.168.255.255",
+      "markers": [],
+      "expected_count": 1
+    },
+    {
+      "id": "PUB-001-007",
+      "rule": "PUB-001",
+      "category": "negative",
+      "text": "9.255.255.255",
+      "markers": [],
+      "expected_count": 0
+    },
+    {
+      "id": "PUB-001-008",
+      "rule": "PUB-001",
+      "category": "negative",
+      "text": "11.0.0.0",
+      "markers": [],
+      "expected_count": 0
+    },
+    {
+      "id": "PUB-001-009",
+      "rule": "PUB-001",
+      "category": "negative",
+      "text": "172.15.255.255",
+      "markers": [],
+      "expected_count": 0
+    },
+    {
+      "id": "PUB-001-010",
+      "rule": "PUB-001",
+      "category": "negative",
+      "text": "172.32.0.0",
+      "markers": [],
+      "expected_count": 0
+    },
+    {
+      "id": "PUB-001-011",
+      "rule": "PUB-001",
+      "category": "negative",
+      "text": "192.167.255.255",
+      "markers": [],
+      "expected_count": 0
+    },
+    {
+      "id": "PUB-001-012",
+      "rule": "PUB-001",
+      "category": "negative",
+      "text": "192.169.0.0",
+      "markers": [],
+      "expected_count": 0
+    },
+    {
+      "id": "PUB-001-013",
+      "rule": "PUB-001",
+      "category": "negative",
+      "text": "192.0.2.1",
+      "markers": [],
+      "expected_count": 0
+    },
+    {
+      "id": "PUB-001-014",
+      "rule": "PUB-001",
+      "category": "negative",
+      "text": "999.1.1.1",
+      "markers": [],
+      "expected_count": 0
+    },
+    {
+      "id": "PUB-001-015",
+      "rule": "PUB-001",
+      "category": "negative",
+      "text": "010.1.2.3",
+      "markers": [],
+      "expected_count": 0
+    },
+    {
+      "id": "PUB-001-016",
+      "rule": "PUB-001",
+      "category": "negative",
+      "text": "x10.1.2.3",
+      "markers": [],
+      "expected_count": 0
+    },
+    {
+      "id": "PUB-001-017",
+      "rule": "PUB-001",
+      "category": "negative",
+      "text": "10.1.2.3x",
+      "markers": [],
+      "expected_count": 0
+    },
+    {
+      "id": "PUB-001-018",
+      "rule": "PUB-001",
+      "category": "negative",
+      "text": "2001:db8::1",
+      "markers": [],
+      "expected_count": 0
+    },
+    {
+      "id": "PUB-001-019",
+      "rule": "PUB-001",
+      "category": "positive",
+      "text": "first\n10.1.2.3/24 10.2.3.4",
+      "markers": [],
+      "expected_count": 2
+    },
+    {
+      "id": "PUB-002-020",
+      "rule": "PUB-002",
+      "category": "positive",
+      "text": "demo.internal",
+      "markers": [],
+      "expected_count": 1
+    },
+    {
+      "id": "PUB-002-021",
+      "rule": "PUB-002",
+      "category": "positive",
+      "text": "host.LOCAL",
+      "markers": [],
+      "expected_count": 1
+    },
+    {
+      "id": "PUB-002-022",
+      "rule": "PUB-002",
+      "category": "positive",
+      "text": "https://node.internal/path",
+      "markers": [],
+      "expected_count": 1
+    },
+    {
+      "id": "PUB-002-023",
+      "rule": "PUB-002",
+      "category": "positive",
+      "text": "демо.local",
+      "markers": [],
+      "expected_count": 1
+    },
+    {
+      "id": "PUB-002-024",
+      "rule": "PUB-002",
+      "category": "negative",
+      "text": "example.invalid",
+      "markers": [],
+      "expected_count": 0
+    },
+    {
+      "id": "PUB-002-025",
+      "rule": "PUB-002",
+      "category": "negative",
+      "text": "host.internalized",
+      "markers": [],
+      "expected_count": 0
+    },
+    {
+      "id": "PUB-002-026",
+      "rule": "PUB-002",
+      "category": "negative",
+      "text": "host.locality",
+      "markers": [],
+      "expected_count": 0
+    },
+    {
+      "id": "PUB-002-027",
+      "rule": "PUB-002",
+      "category": "negative",
+      "text": "internal",
+      "markers": [],
+      "expected_count": 0
+    },
+    {
+      "id": "PUB-003-028",
+      "rule": "PUB-003",
+      "category": "positive",
+      "text": "/home/synthetic/file",
+      "markers": [],
+      "expected_count": 1
+    },
+    {
+      "id": "PUB-003-029",
+      "rule": "PUB-003",
+      "category": "positive",
+      "text": "/Users/synthetic/report",
+      "markers": [],
+      "expected_count": 1
+    },
+    {
+      "id": "PUB-003-030",
+      "rule": "PUB-003",
+      "category": "positive",
+      "text": "C:\\Users\\synthetic\\file",
+      "markers": [],
+      "expected_count": 1
+    },
+    {
+      "id": "PUB-003-031",
+      "rule": "PUB-003",
+      "category": "positive",
+      "text": "z:\\Users\\synthetic\\file",
+      "markers": [],
+      "expected_count": 1
+    },
+    {
+      "id": "PUB-003-032",
+      "rule": "PUB-003",
+      "category": "negative",
+      "text": "~/file",
+      "markers": [],
+      "expected_count": 0
+    },
+    {
+      "id": "PUB-003-033",
+      "rule": "PUB-003",
+      "category": "negative",
+      "text": "home/synthetic",
+      "markers": [],
+      "expected_count": 0
+    },
+    {
+      "id": "PUB-003-034",
+      "rule": "PUB-003",
+      "category": "negative",
+      "text": "C:\\users\\synthetic",
+      "markers": [],
+      "expected_count": 0
+    },
+    {
+      "id": "PUB-003-035",
+      "rule": "PUB-003",
+      "category": "boundary",
+      "text": "C:/Users/synthetic",
+      "markers": [],
+      "expected_count": 1
+    },
+    {
+      "id": "PUB-003-036",
+      "rule": "PUB-003",
+      "category": "negative",
+      "text": "/home/",
+      "markers": [],
+      "expected_count": 0
+    },
+    {
+      "id": "PUB-003-037",
+      "rule": "PUB-003",
+      "category": "negative",
+      "text": "/users/synthetic",
+      "markers": [],
+      "expected_count": 0
+    },
+    {
+      "id": "PUB-004-038",
+      "rule": "PUB-004",
+      "category": "positive",
+      "text": "-----BEGIN PRIVATE KEY-----",
+      "markers": [],
+      "expected_count": 1
+    },
+    {
+      "id": "PUB-004-039",
+      "rule": "PUB-004",
+      "category": "positive",
+      "text": "-----BEGIN RSA PRIVATE KEY-----",
+      "markers": [],
+      "expected_count": 1
+    },
+    {
+      "id": "PUB-004-040",
+      "rule": "PUB-004",
+      "category": "positive",
+      "text": "-----BEGIN EC PRIVATE KEY-----",
+      "markers": [],
+      "expected_count": 1
+    },
+    {
+      "id": "PUB-004-041",
+      "rule": "PUB-004",
+      "category": "positive",
+      "text": "-----BEGIN OPENSSH PRIVATE KEY-----",
+      "markers": [],
+      "expected_count": 1
+    },
+    {
+      "id": "PUB-004-042",
+      "rule": "PUB-004",
+      "category": "positive",
+      "text": "-----BEGIN DSA PRIVATE KEY-----",
+      "markers": [],
+      "expected_count": 1
+    },
+    {
+      "id": "PUB-004-043",
+      "rule": "PUB-004",
+      "category": "positive",
+      "text": "-----BEGIN ENCRYPTED PRIVATE KEY-----",
+      "markers": [],
+      "expected_count": 1
+    },
+    {
+      "id": "PUB-004-044",
+      "rule": "PUB-004",
+      "category": "negative",
+      "text": "-----BEGIN PUBLIC KEY-----",
+      "markers": [],
+      "expected_count": 0
+    },
+    {
+      "id": "PUB-004-045",
+      "rule": "PUB-004",
+      "category": "negative",
+      "text": "-----begin PRIVATE KEY-----",
+      "markers": [],
+      "expected_count": 0
+    },
+    {
+      "id": "PUB-004-046",
+      "rule": "PUB-004",
+      "category": "negative",
+      "text": "BEGIN PRIVATE KEY",
+      "markers": [],
+      "expected_count": 0
+    },
+    {
+      "id": "PUB-004-047",
+      "rule": "PUB-004",
+      "category": "negative",
+      "text": "-----BEGIN UNKNOWN PRIVATE KEY-----",
+      "markers": [],
+      "expected_count": 0
+    },
+    {
+      "id": "PUB-005-048",
+      "rule": "PUB-005",
+      "category": "positive",
+      "text": "A.B",
+      "markers": [
+        "a.b"
+      ],
+      "expected_count": 1
+    },
+    {
+      "id": "PUB-005-049",
+      "rule": "PUB-005",
+      "category": "negative",
+      "text": "axb",
+      "markers": [
+        "a.b"
+      ],
+      "expected_count": 0
+    },
+    {
+      "id": "PUB-005-050",
+      "rule": "PUB-005",
+      "category": "positive",
+      "text": "syntheticmarkerextra",
+      "markers": [
+        "marker"
+      ],
+      "expected_count": 1
+    },
+    {
+      "id": "PUB-005-051",
+      "rule": "PUB-005",
+      "category": "positive",
+      "text": "demo DEMO",
+      "markers": [
+        "demo"
+      ],
+      "expected_count": 2
+    },
+    {
+      "id": "PUB-005-052",
+      "rule": "PUB-005",
+      "category": "negative",
+      "text": "demo",
+      "markers": [
+        "missing"
+      ],
+      "expected_count": 0
+    },
+    {
+      "id": "PUB-005-053",
+      "rule": "PUB-005",
+      "category": "positive",
+      "text": "ДЕМО",
+      "markers": [
+        "демо"
+      ],
+      "expected_count": 1
+    },
+    {
+      "id": "PUB-005-054",
+      "rule": "PUB-005",
+      "category": "positive",
+      "text": "demo",
+      "markers": [
+        "de",
+        "demo"
+      ],
+      "expected_count": 2
+    }
+  ]
+}

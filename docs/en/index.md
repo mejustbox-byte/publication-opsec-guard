@@ -32,3 +32,5 @@ All examples are synthetic. Production exports, secrets, internal organization n
 ---
 
 [Documentation index](index.md) · [Русский](../ru/index.md)
+
+- [ Synthetic rule corpus](rule-corpus.md)

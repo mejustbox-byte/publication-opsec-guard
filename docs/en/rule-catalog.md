@@ -67,3 +67,8 @@ Each `markers` string is escaped and matched as a case-insensitive literal subst
 ---
 
 [Documentation index](index.md) · [Русский](../ru/rule-catalog.md)
+
+
+## Verified representation caveat
+
+`C:/Users/synthetic` matches the Unix-style `/Users/` substring. This is incidental text matching, not Windows path parsing. The earlier statement excluding all Windows forward-slash paths was too broad. See [rule corpus](rule-corpus.md).
