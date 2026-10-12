@@ -18,7 +18,12 @@ def package(path, text='safe', extras=None, main=None, compression=zipfile.ZIP_D
         archive.writestr('[Content_Types].xml', TYPES)
         archive.writestr('_rels/.rels', RELS)
         archive.writestr('word/document.xml', main or f'<w:document xmlns:w="{W}"><w:body><w:p><w:r><w:t>{text}</w:t></w:r></w:p></w:body></w:document>')
-        for name, value in (extras or {}).items(): archive.writestr(name, value)
+        for name, value in (extras or {}).items():
+            info = zipfile.ZipInfo(name)
+            # Preserve malicious names literally: Windows ZipInfo normally normalizes separators.
+            info.filename = info.orig_filename = name
+            info.compress_type = compression
+            archive.writestr(info, value)
 
 class DocumentTests(unittest.TestCase):
     def setUp(self):
