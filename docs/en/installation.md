@@ -2,7 +2,7 @@
 
 ## What is delivered
 
-Version 0.2.0a3 supplies a Python wheel/source build configuration and two console commands: `publication-opsec-guard` scans text; `publication-opsec-validate` validates saved JSON. The scanner has no runtime dependencies. Validation is an optional extra with the same exact versions as `requirements-validation.txt`. The wheel includes the schema in a dedicated data package. Tests, examples and source wrappers remain in the checkout/source distribution rather than the runtime wheel.
+Version 0.2.0a4 supplies a Python wheel/source build configuration and two console commands: `publication-opsec-guard` scans text; `publication-opsec-validate` validates saved JSON. The scanner has no runtime dependencies. Validation is an optional extra with the same exact versions as `requirements-validation.txt`. The wheel includes the schema in a dedicated data package. Tests, examples and source wrappers remain in the checkout/source distribution rather than the runtime wheel.
 
 ## Requirements and supported evidence
 
@@ -55,3 +55,6 @@ Missing console command usually means the wrong environment or PATH; invoke its 
 ---
 
 [Documentation index](index.md) · [Русский](../ru/installation.md)
+
+
+[Optional secret-engine CLI](secret-adapter.md) is installed with the same package; the engine binary is supplied separately.

@@ -56,3 +56,6 @@ Start with the [documentation index](docs/en/index.md): requirements, threats, a
 
 
 [Install the CLI package](docs/en/installation.md): core install `python3 -m pip install .`; optional validator `python3 -m pip install ".[validation]"`. PyPI publication is not claimed.
+
+
+[Optional Gitleaks adapter](docs/en/secret-adapter.md): separate command with explicit pinned binary/digest and unavailable-engine status.

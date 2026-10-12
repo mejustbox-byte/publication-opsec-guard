@@ -56,3 +56,6 @@ Python должен быть установлен; сторонние пакет
 
 
 [Установка CLI-пакета](docs/ru/installation.md): ядро `python3 -m pip install .`; валидатор `python3 -m pip install ".[validation]"`. Публикация в PyPI не заявляется.
+
+
+[Дополнительный адаптер Gitleaks](docs/ru/secret-adapter.md): отдельная команда с фиксированным бинарником/хешем и явным статусом недоступности.
