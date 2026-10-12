@@ -1,3 +1,7 @@
+# Alpha 0.2.0a3: installable CLI
+
+Wheel packaging, two console commands, bundled schema data, optional validation dependencies and clean-environment installation checks are delivered. Scanner-only installation remains dependency-free. Source launchers require the adjacent package. Contract remains 0.2. Build verification compares two wheel hashes at fixed epoch; independent cross-platform reproducibility and PyPI publication are not claimed. See [installation](installation.md).
+
 # Alpha 0.2.0a2: report validation
 
 ## Delivered

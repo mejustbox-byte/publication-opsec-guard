@@ -34,3 +34,5 @@ Publication OPSEC Guard помогает проверить подготовле
 [Оглавление документации](index.md) · [English](../en/index.md)
 
 - [ Синтетический корпус правил](rule-corpus.md)
+
+- [Установка и поставка](installation.md)

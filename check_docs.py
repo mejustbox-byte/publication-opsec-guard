@@ -52,6 +52,7 @@ def main():
     blocks = re.findall(r'```bash\n(.*?)```', guide, re.S)
     with tempfile.TemporaryDirectory() as directory:
         shutil.copy(ROOT / 'guard.py', Path(directory, 'guard.py'))
+        shutil.copytree(ROOT / 'publication_opsec_guard', Path(directory, 'publication_opsec_guard'))
         for block, code in zip(blocks[1:3], (1, 0)):
             execute_block(block, directory, code)
         before = json.loads(Path(directory, 'demo-report.json').read_text(encoding='utf-8'))

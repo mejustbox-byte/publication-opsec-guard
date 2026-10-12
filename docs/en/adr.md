@@ -12,7 +12,7 @@ Each decision describes context, choice and consequences. Status refers to the c
 
 **Alternatives:** Go would simplify single-binary distribution but add a separate stack; a web service would require document transfer, authentication and storage. Neither provides necessary value for this scope.
 
-**Consequences:** users need Python; there is no binary, pip package or installer. No third-party dependencies does not establish absence of runtime or code defects.
+**Consequences:** users need Python; a wheel is available from 0.2.0a3; there is no native binary or installer. No third-party dependencies does not establish absence of runtime or code defects.
 
 ## ADR-002 — local reading without repair
 
@@ -69,3 +69,8 @@ Each decision describes context, choice and consequences. Status refers to the c
 ---
 
 [Documentation index](index.md) · [Русский](../ru/adr.md)
+
+
+## ADR-007 — installable offline CLI
+
+Accepted for 0.2.0a3. Use setuptools with explicit packages and console entry points; retain source launchers. Bundle schema data separately and keep validator dependencies optional. Build twice at a fixed epoch and test installation outside the checkout. This adds packaging evidence, not PyPI publication or fully hash-locked builds. See [installation](installation.md).
