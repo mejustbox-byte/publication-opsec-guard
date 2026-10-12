@@ -1,6 +1,5 @@
 __pycache__/
-*.pyc
-/reports/
-policy.local.json
-
-/.venv/
+*.egg-info/
+build/
+dist/
+.venv/

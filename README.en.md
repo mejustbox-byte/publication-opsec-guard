@@ -6,7 +6,7 @@
 
 Guard locates working addresses, internal domains, user paths, private-key headers and organization markers in prepared material. It identifies files and lines, retains uninspected objects and leaves publication decisions to the information owner.
 
-> **0.2.0a2 is a text-only alpha prototype.** PDF, Office, images, archives and Git history are not inspected. Exit code 0 does not guarantee the absence of secrets.
+> **0.2.0a3 is a text-only alpha prototype.** PDF, Office, images, archives and Git history are not inspected. Exit code 0 does not guarantee the absence of secrets.
 
 [Русский](README.ru.md) · [Full guide](docs/en/index.md) · [Rules](docs/en/rule-catalog.md) · [CLI](docs/en/cli-reference.md) · [Roadmap](docs/en/development-plan.md)
 
@@ -53,3 +53,6 @@ The optional [report validator](docs/en/report-validation.md) checks the bundled
 All 37 test methods, dependency checks and executable-documentation checks passed in [CI](https://github.com/mejustbox-byte/publication-opsec-guard/actions/runs/38156874002) on Linux, Windows and macOS. The [matrix](docs/en/check-matrix.md) records the tested head and limits of this evidence.
 
 Start with the [documentation index](docs/en/index.md): requirements, threats, architecture, ADR, rules, CLI/policy, JSON, troubleshooting, tests and milestones. [Release notes](docs/en/release-notes.md) describe actual status; the alpha release remains a draft.
+
+
+[Install the CLI package](docs/en/installation.md): core install `python3 -m pip install .`; optional validator `python3 -m pip install ".[validation]"`. PyPI publication is not claimed.

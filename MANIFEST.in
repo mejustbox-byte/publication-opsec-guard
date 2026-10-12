@@ -1,0 +1,7 @@
+include README*.md
+include requirements-validation.txt
+recursive-include docs *.md
+recursive-include examples *.json
+include guard.py validate_report.py
+include test_*.py check_docs.py
+include verify_install.py
