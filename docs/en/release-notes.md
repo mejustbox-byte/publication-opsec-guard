@@ -1,3 +1,9 @@
+# Alpha 0.3.0a1
+
+Delivered XLSX XML profile, unified publication-opsec-inspect and all-envelope publication-opsec-validate; aggregate limits and explicit untested states; MIT license and installable wheel/source package. Includes 84 tests and RU/EN guides. Core response-0.2, documents-0.2 and secrets-0.1 remain; bundle-0.1 is added.
+
+Limitations: no PDF/OCR, arbitrary archive or embedded binary analysis; no Office rendering/formula evaluation; requested specialist secret inspection of Office remains not_tested; real Gitleaks execution is verified on Linux only. Alpha is not sole publication authorization. Dependency audit is point-in-time and not a runtime/engine or signature audit. Release artifacts are attached by the published-prerelease workflow with SHA256SUMS; PyPI is not published.
+
 # Alpha 0.2.0a6: PPTX XML profile
 
 Adds PresentationML package recognition, joined DrawingML text, notes/hidden-slide inspection and legacy comment-author metadata. Documents envelope moves to 0.2 with explicit format and generic OOXML scope/package reason; 0.1 schema remains for historic outputs. Core and secrets contracts are unchanged. Seven new presentation test methods, 71 total. Media/embeddings remain gaps, and PowerPoint rendering is unverified. See [PPTX/migration](pptx-inspection.md).

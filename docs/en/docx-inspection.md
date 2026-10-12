@@ -61,7 +61,7 @@ Findings can coexist with gaps. Review both arrays. Images are never marked clea
 
 ## Response schema
 
-The independent `documents-0.2` envelope contains schema/tool version, explicit scope, document basename, coverage state, counters, effective limits, findings and coverage gaps. The bundled [JSON Schema](../../schemas/documents-0.2.schema.json) validates shape; it does not establish producer authenticity or publication safety. The core `publication-opsec-validate` CLI handles response-0.2 only and rejects this envelope.
+The independent `documents-0.2` envelope contains schema/tool version, explicit scope, document basename, coverage state, counters, effective limits, findings and coverage gaps. The bundled [JSON Schema](../../schemas/documents-0.2.schema.json) validates shape; it does not establish producer authenticity or publication safety. The core `publication-opsec-validate` CLI handles response-0.2 only and now supports this envelope.
 
 `coverage_complete` describes successful processing of this constrained XML-text/selected-metadata scope. It does not validate relationships semantically, discover all hidden/custom XML meaning, establish visual content completeness or guarantee detection of every secret. Strict OOXML variants, unusual main-part locations and uncommon valid compression/encoding profiles may be rejected conservatively.
 
@@ -77,3 +77,5 @@ These fixtures do not prove Microsoft Word round-trip rendering or every real-wo
 
 
 Current document envelope is 0.2 and includes format=docx; see [migration and PPTX](pptx-inspection.md). The 0.1 schema is retained for historical outputs.
+
+[All-report validation](all-report-validation.md) is supplied from 0.3.0a1.

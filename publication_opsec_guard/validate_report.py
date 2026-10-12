@@ -141,6 +141,9 @@ def validate_response(response, max_errors=DEFAULT_MAX_ERRORS):
     """Validate a decoded JSON object; file loading separately enforces strict JSON."""
     if type(max_errors) is not int or max_errors < 1:
         raise ValueError('Invalid error limit')
+    if isinstance(response, dict) and response.get('schema_version') in ('documents-0.1', 'documents-0.2', 'secrets-0.1', 'bundle-0.1'):
+        from .extended_validation import validate
+        return validate(response, max_errors)
     validator = local_validator()
     # Choose a branch for useful safe locations; mixed/unknown envelopes fail closed.
     branch = 'startup_error' if isinstance(response, dict) and 'error' in response else 'report'

@@ -204,6 +204,7 @@
       "enum": [
         "docx",
         "pptx",
+        "xlsx",
         "unsupported"
       ]
     }

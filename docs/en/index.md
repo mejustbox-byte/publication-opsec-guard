@@ -1,6 +1,6 @@
 # Publication OPSEC Guard documentation
 
-> **Implementation:** 0.2.0a2 · **Report contract:** 0.2 · **Status:** text-only alpha prototype.
+> **Implementation:** 0.3.0a1 · **Report contract:** 0.2 · **Status:** alpha: text, bounded DOCX/PPTX/XLSX, explicit optional secrets.
 
 Publication OPSEC Guard inspects prepared material before it leaves an organization. It reads local UTF-8 files, checks five disclosure categories and returns JSON with finding locations. It does not modify input material or send it to external services.
 
@@ -45,3 +45,6 @@ All examples are synthetic. Production exports, secrets, internal organization n
 - [DOCX XML inspection](docx-inspection.md)
 
 - [PPTX and document contract migration](pptx-inspection.md)
+
+
+[Unified inspection](unified-inspection.md) · [XLSX](xlsx-inspection.md) · [All-report validation](all-report-validation.md)

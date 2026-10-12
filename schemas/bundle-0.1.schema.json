@@ -1,0 +1,1131 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "bundle-0.1"
+    },
+    "tool_version": {
+      "type": "string"
+    },
+    "scope": {
+      "const": "utf8-text-and-supported-ooxml"
+    },
+    "secrets_requested": {
+      "type": "boolean"
+    },
+    "coverage_complete": {
+      "type": "boolean"
+    },
+    "files_encountered": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "bytes_read": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "limits": {
+      "type": "object",
+      "properties": {
+        "max_files": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_bytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_directories": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_findings": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_documents": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "max_files",
+        "max_bytes",
+        "max_directories",
+        "max_findings",
+        "max_documents"
+      ],
+      "additionalProperties": false
+    },
+    "text_report": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/core/$defs/report"
+        }
+      ]
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/document"
+      }
+    },
+    "secrets_report": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/secret"
+        }
+      ]
+    },
+    "coverage_gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "const": "not_tested"
+          },
+          "reason": {
+            "type": "string",
+            "enum": [
+              "directory_unreadable",
+              "directory_count_limit",
+              "excluded_or_symlink_directory",
+              "file_count_limit",
+              "symlink",
+              "unsupported_format",
+              "total_bytes_limit",
+              "not_regular_file",
+              "file_size_limit",
+              "unreadable",
+              "empty_scope",
+              "incomplete_engine_configuration",
+              "no_secret_text_scope",
+              "document_secret_engine_not_tested",
+              "invalid_input_or_policy",
+              "finding_count_limit",
+              "document_count_limit"
+            ]
+          },
+          "asset_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "tool_version",
+    "scope",
+    "secrets_requested",
+    "coverage_complete",
+    "files_encountered",
+    "bytes_read",
+    "limits",
+    "text_report",
+    "documents",
+    "secrets_report",
+    "coverage_gaps"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "core": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "title": "Publication OPSEC Guard response contract 0.2",
+      "description": "Structural contract. Cross-field invariants are checked by validate_report.py.",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/core/$defs/report"
+        },
+        {
+          "$ref": "#/$defs/core/$defs/startup_error"
+        }
+      ],
+      "$defs": {
+        "report": {
+          "type": "object",
+          "required": [
+            "schema_version",
+            "tool_version",
+            "scope",
+            "coverage_complete",
+            "files_inspected",
+            "files_encountered",
+            "bytes_read",
+            "scan_stopped",
+            "limits",
+            "exclusions",
+            "findings",
+            "coverage_gaps"
+          ],
+          "properties": {
+            "schema_version": {
+              "const": "0.2"
+            },
+            "tool_version": {
+              "type": "string",
+              "minLength": 1
+            },
+            "scope": {
+              "const": "utf8-text-only"
+            },
+            "coverage_complete": {
+              "type": "boolean"
+            },
+            "files_inspected": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "files_encountered": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "bytes_read": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "scan_stopped": {
+              "type": "boolean"
+            },
+            "limits": {
+              "type": "object",
+              "required": [
+                "max_bytes",
+                "max_files",
+                "max_total_bytes",
+                "max_findings",
+                "max_directories"
+              ],
+              "properties": {
+                "max_bytes": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "max_files": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "max_total_bytes": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "max_findings": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "max_directories": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              },
+              "additionalProperties": false
+            },
+            "exclusions": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/core/$defs/exclusion"
+              }
+            },
+            "findings": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/core/$defs/finding"
+              }
+            },
+            "coverage_gaps": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/core/$defs/gap"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "startup_error": {
+          "type": "object",
+          "required": [
+            "error",
+            "status"
+          ],
+          "properties": {
+            "error": {
+              "const": "Invalid input or policy"
+            },
+            "status": {
+              "const": "not_tested"
+            }
+          },
+          "additionalProperties": false
+        },
+        "finding": {
+          "type": "object",
+          "required": [
+            "check_id",
+            "asset_id",
+            "status",
+            "severity",
+            "evidence",
+            "remediation"
+          ],
+          "properties": {
+            "check_id": {
+              "enum": [
+                "PUB-001",
+                "PUB-002",
+                "PUB-003",
+                "PUB-004",
+                "PUB-005"
+              ]
+            },
+            "asset_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "status": {
+              "const": "fail"
+            },
+            "severity": {
+              "enum": [
+                "medium",
+                "high",
+                "critical"
+              ]
+            },
+            "evidence": {
+              "type": "object",
+              "required": [
+                "line",
+                "redacted"
+              ],
+              "properties": {
+                "line": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "redacted": {
+                  "const": true
+                }
+              },
+              "additionalProperties": false
+            },
+            "remediation": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": false,
+          "oneOf": [
+            {
+              "properties": {
+                "check_id": {
+                  "const": "PUB-001"
+                },
+                "severity": {
+                  "const": "high"
+                },
+                "remediation": {
+                  "const": "Replace internal addresses with documentation addresses."
+                }
+              }
+            },
+            {
+              "properties": {
+                "check_id": {
+                  "const": "PUB-002"
+                },
+                "severity": {
+                  "const": "medium"
+                },
+                "remediation": {
+                  "const": "Replace internal domain names with example.invalid."
+                }
+              }
+            },
+            {
+              "properties": {
+                "check_id": {
+                  "const": "PUB-003"
+                },
+                "severity": {
+                  "const": "medium"
+                },
+                "remediation": {
+                  "const": "Replace identifying user paths with synthetic examples."
+                }
+              }
+            },
+            {
+              "properties": {
+                "check_id": {
+                  "const": "PUB-004"
+                },
+                "severity": {
+                  "const": "critical"
+                },
+                "remediation": {
+                  "const": "Remove the private key; if exposed, rotate it."
+                }
+              }
+            },
+            {
+              "properties": {
+                "check_id": {
+                  "const": "PUB-005"
+                },
+                "severity": {
+                  "const": "high"
+                },
+                "remediation": {
+                  "const": "Review and replace the organization marker."
+                }
+              }
+            }
+          ]
+        },
+        "gap": {
+          "oneOf": [
+            {
+              "type": "object",
+              "required": [
+                "status",
+                "reason",
+                "asset_id"
+              ],
+              "properties": {
+                "status": {
+                  "const": "not_tested"
+                },
+                "reason": {
+                  "enum": [
+                    "unsupported_format",
+                    "symlink",
+                    "size_limit",
+                    "binary_content",
+                    "not_regular_file",
+                    "unreadable_or_invalid_utf8",
+                    "total_bytes_limit",
+                    "finding_count_limit"
+                  ]
+                },
+                "asset_id": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "status",
+                "reason"
+              ],
+              "properties": {
+                "status": {
+                  "const": "not_tested"
+                },
+                "reason": {
+                  "enum": [
+                    "directory_unreadable",
+                    "file_count_limit",
+                    "directory_count_limit",
+                    "empty_scope"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            }
+          ]
+        },
+        "exclusion": {
+          "type": "object",
+          "required": [
+            "asset_id",
+            "reason"
+          ],
+          "properties": {
+            "asset_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "reason": {
+              "const": "excluded_directory"
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    },
+    "document": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "documents-0.2"
+        },
+        "tool_version": {
+          "type": "string"
+        },
+        "scope": {
+          "const": "ooxml-utf8-xml-text-and-selected-identity-metadata"
+        },
+        "asset_id": {
+          "type": "string"
+        },
+        "coverage_complete": {
+          "type": "boolean"
+        },
+        "parts_inspected": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "xml_bytes_read": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "limits": {
+          "type": "object",
+          "properties": {
+            "archive_bytes": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "parts": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "part_bytes": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "total_xml_bytes": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "compression_ratio": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "xml_depth": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "xml_elements": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "findings": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "required": [
+            "archive_bytes",
+            "parts",
+            "part_bytes",
+            "total_xml_bytes",
+            "compression_ratio",
+            "xml_depth",
+            "xml_elements",
+            "findings"
+          ],
+          "additionalProperties": false
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "check_id": {
+                "enum": [
+                  "DOC-001",
+                  "PUB-001",
+                  "PUB-002",
+                  "PUB-003",
+                  "PUB-004",
+                  "PUB-005"
+                ]
+              },
+              "asset_id": {
+                "type": "string"
+              },
+              "part_id": {
+                "type": "string"
+              },
+              "status": {
+                "const": "fail"
+              },
+              "severity": {
+                "enum": [
+                  "medium",
+                  "high",
+                  "critical"
+                ]
+              },
+              "evidence": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "kind": {
+                        "const": "identity_metadata"
+                      },
+                      "redacted": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "kind",
+                      "redacted"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "kind": {
+                        "const": "extracted_line"
+                      },
+                      "redacted": {
+                        "const": true
+                      },
+                      "line": {
+                        "type": "integer",
+                        "minimum": 1
+                      }
+                    },
+                    "required": [
+                      "kind",
+                      "redacted",
+                      "line"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              "remediation": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "check_id",
+              "asset_id",
+              "part_id",
+              "status",
+              "severity",
+              "evidence",
+              "remediation"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "coverage_gaps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "const": "not_tested"
+              },
+              "reason": {
+                "enum": [
+                  "uninspected_zip_metadata",
+                  "xml_comments_or_processing_instructions",
+                  "archive_size_limit",
+                  "part_count_limit",
+                  "unsafe_or_duplicate_part",
+                  "encrypted_part",
+                  "unsupported_compression",
+                  "part_size_or_ratio_limit",
+                  "invalid_ooxml_package",
+                  "unsupported_part",
+                  "total_xml_bytes_limit",
+                  "part_read_limit",
+                  "invalid_or_unsupported_xml",
+                  "external_reference",
+                  "extracted_text_incomplete",
+                  "invalid_input_policy_or_package"
+                ]
+              },
+              "part_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "status",
+              "reason"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "format": {
+          "enum": [
+            "docx",
+            "pptx",
+            "xlsx",
+            "unsupported"
+          ]
+        }
+      },
+      "required": [
+        "schema_version",
+        "tool_version",
+        "scope",
+        "asset_id",
+        "coverage_complete",
+        "parts_inspected",
+        "xml_bytes_read",
+        "limits",
+        "findings",
+        "coverage_gaps",
+        "format"
+      ],
+      "additionalProperties": false
+    },
+    "secret": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "secrets-0.1"
+        },
+        "tool_version": {
+          "type": "string"
+        },
+        "engine": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "const": "gitleaks"
+            },
+            "required_version": {
+              "const": "8.24.2"
+            },
+            "status": {
+              "enum": [
+                "completed",
+                "not_tested"
+              ]
+            },
+            "reason": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "name",
+            "required_version",
+            "status",
+            "reason"
+          ],
+          "additionalProperties": false
+        },
+        "text_report": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/secret/$defs/core/$defs/report"
+            }
+          ]
+        },
+        "findings": {
+          "type": "array",
+          "maxItems": 10000,
+          "items": {
+            "type": "object",
+            "properties": {
+              "engine_rule": {
+                "type": "string",
+                "pattern": "^[a-z0-9-]{1,128}$"
+              },
+              "asset_id": {
+                "type": "string"
+              },
+              "status": {
+                "const": "fail"
+              },
+              "evidence": {
+                "type": "object",
+                "properties": {
+                  "line": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "redacted": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "line",
+                  "redacted"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "engine_rule",
+              "asset_id",
+              "status",
+              "evidence"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "schema_version",
+        "tool_version",
+        "engine",
+        "text_report",
+        "findings"
+      ],
+      "additionalProperties": false,
+      "$defs": {
+        "core": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "title": "Publication OPSEC Guard response contract 0.2",
+          "description": "Structural contract. Cross-field invariants are checked by validate_report.py.",
+          "oneOf": [
+            {
+              "$ref": "#/$defs/secret/$defs/core/$defs/report"
+            },
+            {
+              "$ref": "#/$defs/secret/$defs/core/$defs/startup_error"
+            }
+          ],
+          "$defs": {
+            "report": {
+              "type": "object",
+              "required": [
+                "schema_version",
+                "tool_version",
+                "scope",
+                "coverage_complete",
+                "files_inspected",
+                "files_encountered",
+                "bytes_read",
+                "scan_stopped",
+                "limits",
+                "exclusions",
+                "findings",
+                "coverage_gaps"
+              ],
+              "properties": {
+                "schema_version": {
+                  "const": "0.2"
+                },
+                "tool_version": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "scope": {
+                  "const": "utf8-text-only"
+                },
+                "coverage_complete": {
+                  "type": "boolean"
+                },
+                "files_inspected": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "files_encountered": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "bytes_read": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "scan_stopped": {
+                  "type": "boolean"
+                },
+                "limits": {
+                  "type": "object",
+                  "required": [
+                    "max_bytes",
+                    "max_files",
+                    "max_total_bytes",
+                    "max_findings",
+                    "max_directories"
+                  ],
+                  "properties": {
+                    "max_bytes": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "max_files": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "max_total_bytes": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "max_findings": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "max_directories": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "exclusions": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/secret/$defs/core/$defs/exclusion"
+                  }
+                },
+                "findings": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/secret/$defs/core/$defs/finding"
+                  }
+                },
+                "coverage_gaps": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/secret/$defs/core/$defs/gap"
+                  }
+                }
+              },
+              "additionalProperties": false
+            },
+            "startup_error": {
+              "type": "object",
+              "required": [
+                "error",
+                "status"
+              ],
+              "properties": {
+                "error": {
+                  "const": "Invalid input or policy"
+                },
+                "status": {
+                  "const": "not_tested"
+                }
+              },
+              "additionalProperties": false
+            },
+            "finding": {
+              "type": "object",
+              "required": [
+                "check_id",
+                "asset_id",
+                "status",
+                "severity",
+                "evidence",
+                "remediation"
+              ],
+              "properties": {
+                "check_id": {
+                  "enum": [
+                    "PUB-001",
+                    "PUB-002",
+                    "PUB-003",
+                    "PUB-004",
+                    "PUB-005"
+                  ]
+                },
+                "asset_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "status": {
+                  "const": "fail"
+                },
+                "severity": {
+                  "enum": [
+                    "medium",
+                    "high",
+                    "critical"
+                  ]
+                },
+                "evidence": {
+                  "type": "object",
+                  "required": [
+                    "line",
+                    "redacted"
+                  ],
+                  "properties": {
+                    "line": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "redacted": {
+                      "const": true
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "remediation": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "additionalProperties": false,
+              "oneOf": [
+                {
+                  "properties": {
+                    "check_id": {
+                      "const": "PUB-001"
+                    },
+                    "severity": {
+                      "const": "high"
+                    },
+                    "remediation": {
+                      "const": "Replace internal addresses with documentation addresses."
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "check_id": {
+                      "const": "PUB-002"
+                    },
+                    "severity": {
+                      "const": "medium"
+                    },
+                    "remediation": {
+                      "const": "Replace internal domain names with example.invalid."
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "check_id": {
+                      "const": "PUB-003"
+                    },
+                    "severity": {
+                      "const": "medium"
+                    },
+                    "remediation": {
+                      "const": "Replace identifying user paths with synthetic examples."
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "check_id": {
+                      "const": "PUB-004"
+                    },
+                    "severity": {
+                      "const": "critical"
+                    },
+                    "remediation": {
+                      "const": "Remove the private key; if exposed, rotate it."
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "check_id": {
+                      "const": "PUB-005"
+                    },
+                    "severity": {
+                      "const": "high"
+                    },
+                    "remediation": {
+                      "const": "Review and replace the organization marker."
+                    }
+                  }
+                }
+              ]
+            },
+            "gap": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "reason",
+                    "asset_id"
+                  ],
+                  "properties": {
+                    "status": {
+                      "const": "not_tested"
+                    },
+                    "reason": {
+                      "enum": [
+                        "unsupported_format",
+                        "symlink",
+                        "size_limit",
+                        "binary_content",
+                        "not_regular_file",
+                        "unreadable_or_invalid_utf8",
+                        "total_bytes_limit",
+                        "finding_count_limit"
+                      ]
+                    },
+                    "asset_id": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "reason"
+                  ],
+                  "properties": {
+                    "status": {
+                      "const": "not_tested"
+                    },
+                    "reason": {
+                      "enum": [
+                        "directory_unreadable",
+                        "file_count_limit",
+                        "directory_count_limit",
+                        "empty_scope"
+                      ]
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "exclusion": {
+              "type": "object",
+              "required": [
+                "asset_id",
+                "reason"
+              ],
+              "properties": {
+                "asset_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "reason": {
+                  "const": "excluded_directory"
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        }
+      },
+      "$schema": "https://json-schema.org/draft/2020-12/schema"
+    }
+  }
+}

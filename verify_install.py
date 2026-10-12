@@ -39,12 +39,15 @@ def main():
         validator = bindir / ('publication-opsec-validate' + suffix)
         secrets = bindir / ('publication-opsec-secrets' + suffix)
         documents = bindir / ('publication-opsec-documents' + suffix)
+        inspector = bindir / ('publication-opsec-inspect' + suffix)
         run([python, '-m', 'pip', 'install', '--no-index', '--no-deps', wheels[0]], temp, env=env)
         run([python, '-m', 'pip', 'check'], temp, env=env)
         material = temp / 'material'; material.mkdir()
         file = material / 'sample.txt'; file.write_text('safe', encoding='utf-8')
         clean = run([scanner, material], temp, env=env)
-        assert json.loads(clean.stdout)['tool_version'] == '0.2.0a6'
+        unified = run([inspector, material], temp, env=env)
+        assert json.loads(unified.stdout)['coverage_complete']
+        assert json.loads(clean.stdout)['tool_version'] == '0.3.0a1'
         run([secrets, '--help'], temp, env=env)
         run([documents, '--help'], temp, env=env)
         document_result = run([documents, temp / 'missing.docx'], temp, expected=2, env=env)
@@ -60,6 +63,8 @@ def main():
         file.unlink(); run([scanner, material], temp, expected=2, env=env)
         run([python, '-m', 'pip', 'install', '-r', ROOT / 'requirements-validation.txt'], temp, env=env)
         run([python, '-m', 'pip', 'check'], temp, env=env)
+        run([validator, report], temp, env=env)
+        report.write_text(unified.stdout, encoding='utf-8')
         run([validator, report], temp, env=env)
         print('OK: deterministic wheel bytes at fixed epoch; clean installed scanner 0/1/2; validator missing dependency 3 and valid report 0')
 

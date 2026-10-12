@@ -21,9 +21,12 @@ CT = 'http://schemas.openxmlformats.org/package/2006/content-types'
 MAIN_TYPE = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml'
 A = 'http://schemas.openxmlformats.org/drawingml/2006/main'
 P = 'http://schemas.openxmlformats.org/presentationml/2006/main'
+S = 'http://schemas.openxmlformats.org/spreadsheetml/2006/main'
+XLSX_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml'
 PPT_TYPE = 'application/vnd.openxmlformats-officedocument.presentationml.presentation.main+xml'
 PROFILES = {'.docx': ('word/document.xml', '{'+W+'}document', MAIN_TYPE),
-            '.pptx': ('ppt/presentation.xml', '{'+P+'}presentation', PPT_TYPE)}
+            '.pptx': ('ppt/presentation.xml', '{'+P+'}presentation', PPT_TYPE),
+            '.xlsx': ('xl/workbook.xml', '{'+S+'}workbook', XLSX_TYPE)}
 
 
 def parse_xml(raw):
@@ -53,11 +56,11 @@ def extracted_lines(root):
     lines = []
     consumed = set()
     for paragraph in root.iter():
-        if paragraph.tag not in {'{'+W+'}p', '{'+A+'}p'}:
+        if paragraph.tag not in {'{'+W+'}p', '{'+A+'}p', '{'+S+'}si', '{'+S+'}is'}:
             continue
         children = list(paragraph.iter()); consumed.update(children)
         value = ''.join(e.text or '' for e in children if e.tag in {
-            '{'+W+'}t', '{'+W+'}delText', '{'+W+'}instrText', '{'+A+'}t'})
+            '{'+W+'}t', '{'+W+'}delText', '{'+W+'}instrText', '{'+A+'}t', '{'+S+'}t'})
         if value: lines.append(value)
     for element in root.iter():
         if element not in consumed and element.text and element.text.strip():
@@ -163,7 +166,8 @@ def inspect(path, policy=None):
                         identity = (name.startswith('docProps/') and local in {'creator','lastModifiedBy','Company','Manager'} and (element.text or '').strip())
                         comment_identity = name.startswith('word/comments') and any(k.split('}')[-1] in {'author','initials'} and v.strip() for k,v in element.attrib.items())
                         presentation_identity = name.startswith('ppt/commentAuthors') and any(k.split('}')[-1] in {'name','initials'} and v.strip() for k,v in element.attrib.items())
-                        if identity or comment_identity or presentation_identity:
+                        spreadsheet_identity = name.startswith('xl/comments') and local == 'author' and (element.text or '').strip()
+                        if identity or comment_identity or presentation_identity or spreadsheet_identity:
                             finding({'check_id': 'DOC-001', 'asset_id': path.name, 'part_id': name,
                                      'status': 'fail', 'severity': 'medium',
                                      'evidence': {'kind': 'identity_metadata', 'redacted': True},

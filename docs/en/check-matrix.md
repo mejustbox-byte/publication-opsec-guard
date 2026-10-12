@@ -67,3 +67,8 @@ All 37 test methods, `pip check` and `check_docs.py` passed on Linux, Windows an
 ---
 
 [Documentation index](index.md) · [Русский](../ru/check-matrix.md)
+
+
+## Alpha scope evidence
+
+Release-cycle tests add XLSX representations, mixed/document-only dispatch, unsupported/empty/link scope, requested-engine failure, aggregate budgets and child-consistency validation. Dependency audit evidence: [pinned validator packages](../evidence/validation-dependency-audit-2026-10-12.json). These are finite synthetic checks; they do not prove complete secret coverage or Office rendering.
