@@ -1,4 +1,4 @@
-"""Bounded DOCX XML-text inspection; images and embedded payloads remain untested."""
+"""Bounded DOCX/PPTX XML-text inspection; images and embedded payloads remain untested."""
 import argparse
 import io
 import json
@@ -19,6 +19,11 @@ LIMITS = {'archive_bytes': 8_000_000, 'parts': 1000, 'part_bytes': 2_000_000,
 W = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'
 CT = 'http://schemas.openxmlformats.org/package/2006/content-types'
 MAIN_TYPE = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml'
+A = 'http://schemas.openxmlformats.org/drawingml/2006/main'
+P = 'http://schemas.openxmlformats.org/presentationml/2006/main'
+PPT_TYPE = 'application/vnd.openxmlformats-officedocument.presentationml.presentation.main+xml'
+PROFILES = {'.docx': ('word/document.xml', '{'+W+'}document', MAIN_TYPE),
+            '.pptx': ('ppt/presentation.xml', '{'+P+'}presentation', PPT_TYPE)}
 
 
 def parse_xml(raw):
@@ -47,10 +52,12 @@ def parse_xml(raw):
 def extracted_lines(root):
     lines = []
     consumed = set()
-    for paragraph in root.iter('{' + W + '}p'):
+    for paragraph in root.iter():
+        if paragraph.tag not in {'{'+W+'}p', '{'+A+'}p'}:
+            continue
         children = list(paragraph.iter()); consumed.update(children)
         value = ''.join(e.text or '' for e in children if e.tag in {
-            '{'+W+'}t', '{'+W+'}delText', '{'+W+'}instrText'})
+            '{'+W+'}t', '{'+W+'}delText', '{'+W+'}instrText', '{'+A+'}t'})
         if value: lines.append(value)
     for element in root.iter():
         if element not in consumed and element.text and element.text.strip():
@@ -61,8 +68,9 @@ def extracted_lines(root):
 
 def inspect(path, policy=None):
     path = Path(path)
-    result = {'schema_version': 'documents-0.1', 'tool_version': VERSION,
-              'scope': 'docx-utf8-xml-text-and-selected-identity-metadata',
+    result = {'schema_version': 'documents-0.2', 'tool_version': VERSION,
+              'scope': 'ooxml-utf8-xml-text-and-selected-identity-metadata',
+              'format': path.suffix.lower().lstrip('.') if path.suffix.lower() in PROFILES else 'unsupported',
               'asset_id': path.name, 'coverage_complete': False, 'parts_inspected': 0,
               'xml_bytes_read': 0, 'limits': dict(LIMITS), 'findings': [], 'coverage_gaps': []}
     def gap(reason, part=None):
@@ -75,7 +83,7 @@ def inspect(path, policy=None):
         result['findings'].append(item)
     try:
         markers = read_policy(policy)
-        if path.suffix.lower() != '.docx' or path.is_symlink():
+        if path.suffix.lower() not in PROFILES or path.is_symlink():
             raise ValueError('Input format')
         fd = os.open(path, os.O_RDONLY | getattr(os, 'O_NOFOLLOW', 0) | getattr(os, 'O_NONBLOCK', 0))
         with os.fdopen(fd, 'rb') as stream:
@@ -110,9 +118,10 @@ def inspect(path, policy=None):
                 if (item.file_size > LIMITS['part_bytes'] or
                         item.file_size > max(1, item.compress_size) * LIMITS['compression_ratio']):
                     gap('part_size_or_ratio_limit', name); return result
-            required = {'[Content_Types].xml', '_rels/.rels', 'word/document.xml'}
+            main_path, main_tag, content_type = PROFILES[path.suffix.lower()]
+            required = {'[Content_Types].xml', '_rels/.rels', main_path}
             if not required <= names:
-                gap('invalid_docx_package'); return result
+                gap('invalid_ooxml_package'); return result
             parsed = {}
             for item in entries:
                 name = item.filename
@@ -134,17 +143,17 @@ def inspect(path, policy=None):
                 except (ValueError, UnicodeError, ET.ParseError):
                     gap('invalid_or_unsupported_xml', name)
             if not required <= parsed.keys():
-                gap('invalid_docx_package'); return result
+                gap('invalid_ooxml_package'); return result
             types = parsed['[Content_Types].xml']
-            main = parsed['word/document.xml']
+            main = parsed[main_path]
             rels = parsed['_rels/.rels']
-            if (types.tag != '{'+CT+'}Types' or main.tag != '{'+W+'}document'
-                    or not any(e.get('PartName') == '/word/document.xml' and e.get('ContentType') == MAIN_TYPE for e in types)
-                    or not any(e.get('Target') == 'word/document.xml' and
+            if (types.tag != '{'+CT+'}Types' or main.tag != main_tag
+                    or not any(e.get('PartName') == '/'+main_path and e.get('ContentType') == content_type for e in types)
+                    or not any(e.get('Target') == main_path and
                                (e.get('Type') or '').endswith('/officeDocument') and
                                e.get('TargetMode') != 'External' for e in rels)):
-                gap('invalid_docx_package'); return result
-            with tempfile.TemporaryDirectory(prefix='guard-docx-') as tmp:
+                gap('invalid_ooxml_package'); return result
+            with tempfile.TemporaryDirectory(prefix='guard-ooxml-') as tmp:
                 sample = Path(tmp) / 'part.txt'
                 for name, root in parsed.items():
                     for element in root.iter():
@@ -153,7 +162,8 @@ def inspect(path, policy=None):
                         local = str(element.tag).split('}')[-1]
                         identity = (name.startswith('docProps/') and local in {'creator','lastModifiedBy','Company','Manager'} and (element.text or '').strip())
                         comment_identity = name.startswith('word/comments') and any(k.split('}')[-1] in {'author','initials'} and v.strip() for k,v in element.attrib.items())
-                        if identity or comment_identity:
+                        presentation_identity = name.startswith('ppt/commentAuthors') and any(k.split('}')[-1] in {'name','initials'} and v.strip() for k,v in element.attrib.items())
+                        if identity or comment_identity or presentation_identity:
                             finding({'check_id': 'DOC-001', 'asset_id': path.name, 'part_id': name,
                                      'status': 'fail', 'severity': 'medium',
                                      'evidence': {'kind': 'identity_metadata', 'redacted': True},

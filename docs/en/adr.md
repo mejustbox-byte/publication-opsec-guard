@@ -89,3 +89,8 @@ Accepted for 0.2.0a4. Execute user-installed Gitleaks 8.24.2 after digest/versio
 ## ADR-010 — bounded DOCX XML before general documents
 
 Accepted for 0.2.0a5. Start with DOCX because ZIP/XML text is inspectable through standard-library APIs without Office automation. Constrain archive size/methods, names, XML encoding/depth/elements and findings; never extract archive paths or fetch external relationships. Keep selected metadata findings and unsupported payload gaps explicit. Use a separate response schema and console command. This is not complete document rendering or arbitrary ZIP support. See [DOCX](docx-inspection.md).
+
+
+## ADR-011 — reuse bounded OOXML parsing for PPTX
+
+Accepted for 0.2.0a6. Share ZIP/XML limits and rejection rules with DOCX, but select main namespace/content type/path by extension and join DrawingML paragraphs separately. Inspect all XML parts, including hidden/unreferenced content. Keep media gaps explicit. Version the document envelope for the added format field and generic scope; retain old schema for historic outputs. See [PPTX](pptx-inspection.md).

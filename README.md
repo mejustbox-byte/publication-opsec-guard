@@ -6,7 +6,7 @@
 
 Guard locates working addresses, internal domains, user paths, private-key headers and organization markers in prepared material. It identifies files and lines, retains uninspected objects and leaves publication decisions to the information owner.
 
-> **0.2.0a5 is a text-only alpha prototype.** The core scanner is text-only. A separate bounded DOCX XML command is available; PDF, images, general archives and Git history are not inspected. Exit code 0 does not guarantee the absence of secrets.
+> **0.2.0a6 is a text-only alpha prototype.** The core scanner is text-only. A separate bounded DOCX XML command is available; PDF, images, general archives and Git history are not inspected. Exit code 0 does not guarantee the absence of secrets.
 
 [Русский](README.ru.md) · [Full guide](docs/en/index.md) · [Rules](docs/en/rule-catalog.md) · [CLI](docs/en/cli-reference.md) · [Roadmap](docs/en/development-plan.md)
 
@@ -62,3 +62,6 @@ Start with the [documentation index](docs/en/index.md): requirements, threats, a
 
 
 [DOCX inspection](docs/en/docx-inspection.md): XML text and selected metadata only; images/attachments remain untested.
+
+
+[PPTX inspection and document-contract migration](docs/en/pptx-inspection.md) are available in the document CLI; media and embedded files remain untested.
