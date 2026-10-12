@@ -25,7 +25,6 @@ def main():
         hook = yaml.safe_load((ROOT / '.pre-commit-hooks.yaml').read_text())[0]
         hook['args'] = ['materials']
         hook['additional_dependencies'] = [str(ROOT)]
-        hook['language_version'] = sys.executable
         (root / '.pre-commit-config.yaml').write_text(yaml.safe_dump(
             {'repos': [{'repo': 'local', 'hooks': [hook]}]}))
         command(['git', 'add', '.'])
