@@ -2,7 +2,7 @@
 
 ## Current state
 
-The 0.2.0a4 text alpha has five rules, contract 0.2 and 50 test methods. M1–M5 are implemented. M2 delivers a bundled schema, standalone validator, labeled response fixtures and automated bilingual-document checks; M6 remains planned.
+The 0.2.0a5 text alpha has five rules, contract 0.2 and 64 test methods. M1–M5 are implemented. M2 delivers a bundled schema, standalone validator, labeled response fixtures and automated bilingual-document checks; M6 DOCX subcycle delivered; other binary formats remain planned.
 
 ## Milestones
 
@@ -13,7 +13,7 @@ The 0.2.0a4 text alpha has five rules, contract 0.2 and 50 test methods. M1–M5
 | M3: implemented | Positive/negative/boundary cases per ID | Labeled synthetic corpus | Every claimed representation has a test; measurements are published without inflation |
 | M4: implemented | CLI packaging, fixed dependencies, reproducible build | Installation artifact and guide | Installation verified in a clean environment; report exposes version |
 | M5: implemented | CI example, pre-commit, specialist secret-scanner adapter | Failure/missing-engine tests | External engine failures remain visible; raw secrets are not emitted |
-| M6: documents | One format per subcycle after a justified selection | Parser, limits, corpus and threat model | Unsupported attachments and failures remain visible |
+| M6: DOCX delivered | One format per subcycle after a justified selection | Parser, limits, corpus and threat model | Unsupported attachments and failures remain visible |
 
 ## Complete-cycle order
 
@@ -41,10 +41,13 @@ After this project completes, the next independent cycle covers a shared OPSEC r
 [Documentation index](index.md) · [Русский](../ru/development-plan.md)
 
 
-M3 delivered: [54 labeled rule cases](rule-corpus.md), 50 test methods locally. Distribution and integrations are delivered; binary-format handling remains planned.
+M3 delivered: [54 labeled rule cases](rule-corpus.md), 64 test methods locally. Distribution and integrations are delivered; binary-format handling remains planned.
 
 
 M5 integration gate: Action, hook and pinned adapter implemented; actual-engine verification is Linux-only. See [integration guide](integrations.md).
 
 
-[Pinned secret adapter](secret-adapter.md) delivered in 0.2.0a4. This supersedes the earlier planned-adapter status. Binary-document handling remains planned.
+[Pinned secret adapter](secret-adapter.md) delivered in 0.2.0a5. This supersedes the earlier planned-adapter status. Binary-document handling remains planned.
+
+
+[DOCX profile](docx-inspection.md) is delivered with its own schema, limits and synthetic corpus. PDF, OCR and other Office formats remain unimplemented.

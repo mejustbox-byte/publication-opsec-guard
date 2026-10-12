@@ -84,3 +84,8 @@ Accepted. A composite Action runs checked-in Python through literal environment 
 ## ADR-009 — pinned external engine and separate envelope
 
 Accepted for 0.2.0a4. Execute user-installed Gitleaks 8.24.2 after digest/version checks against an isolated prepared UTF-8 snapshot, with explicit default config and suppressed logs. Do not vendor or auto-update the engine. Preserve missing/failure states and discard secret-bearing fields. Use a separate envelope so the core consumer contract remains stable. The snapshot is not an OS sandbox; actual-engine evidence is Linux-only. See [adapter](secret-adapter.md).
+
+
+## ADR-010 — bounded DOCX XML before general documents
+
+Accepted for 0.2.0a5. Start with DOCX because ZIP/XML text is inspectable through standard-library APIs without Office automation. Constrain archive size/methods, names, XML encoding/depth/elements and findings; never extract archive paths or fetch external relationships. Keep selected metadata findings and unsupported payload gaps explicit. Use a separate response schema and console command. This is not complete document rendering or arbitrary ZIP support. See [DOCX](docx-inspection.md).

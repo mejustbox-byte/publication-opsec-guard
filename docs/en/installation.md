@@ -58,3 +58,6 @@ Missing console command usually means the wrong environment or PATH; invoke its 
 
 
 [Optional secret-engine CLI](secret-adapter.md) is installed with the same package; the engine binary is supplied separately.
+
+
+[DOCX console command](docx-inspection.md) is supplied in 0.2.0a5 without extra runtime dependencies.

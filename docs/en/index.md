@@ -41,3 +41,5 @@ All examples are synthetic. Production exports, secrets, internal organization n
 
 
 [Pinned secret adapter](secret-adapter.md) delivered in 0.2.0a4. This supersedes the earlier planned-adapter status. Binary-document handling remains planned.
+
+- [DOCX XML inspection](docx-inspection.md)
