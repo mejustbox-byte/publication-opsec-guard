@@ -42,7 +42,7 @@ def main():
         material = temp / 'material'; material.mkdir()
         file = material / 'sample.txt'; file.write_text('safe', encoding='utf-8')
         clean = run([scanner, material], temp, env=env)
-        assert json.loads(clean.stdout)['tool_version'] == '0.2.0a3'
+        assert json.loads(clean.stdout)['tool_version'] == '0.2.0a4'
         report = temp / 'report.json'; report.write_text(clean.stdout, encoding='utf-8')
         absent = run([validator, report], temp, expected=3, env=env)
         assert json.loads(absent.stdout)['errors'][0]['code'] == 'dependency_missing'

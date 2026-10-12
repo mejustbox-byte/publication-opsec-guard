@@ -1,3 +1,7 @@
+# Alpha 0.2.0a4: optional secret engine
+
+Adds the separate publication-opsec-secrets CLI with pinned version/digest, bounded UTF-8 snapshot, redacted metadata conversion and explicit unavailable-engine states. Existing core report schema stays 0.2; adapter envelope is secrets-0.1 and is not accepted by the core validator. Core Action/hook are unchanged. Eight adapter test methods plus Linux real-engine synthetic verification are supplied. See [adapter](secret-adapter.md).
+
 # CI/pre-commit integration update
 
 Delivered composite Action, explicit-directory hook, safe Action runner and synthetic integration checks. Codes 1/2 fail the gate; Action retains a JSON report outside scope and does not overwrite existing files. Tool version remains 0.2.0a3, contract 0.2; scanner rules are unchanged. Specialist adapter remains unimplemented. See [integration guide](integrations.md).

@@ -79,3 +79,8 @@ Accepted for 0.2.0a3. Use setuptools with explicit packages and console entry po
 ## ADR-008 — explicit-scope publication gates
 
 Accepted. A composite Action runs checked-in Python through literal environment inputs and retains a new external report. A pre-commit hook scans an explicit directory with pass_filenames disabled and always_run enabled. Both propagate nonzero status. External secret engines remain a separate adapter decision; they are not silently optional successful checks. See [integrations](integrations.md).
+
+
+## ADR-009 — pinned external engine and separate envelope
+
+Accepted for 0.2.0a4. Execute user-installed Gitleaks 8.24.2 after digest/version checks against an isolated prepared UTF-8 snapshot, with explicit default config and suppressed logs. Do not vendor or auto-update the engine. Preserve missing/failure states and discard secret-bearing fields. Use a separate envelope so the core consumer contract remains stable. The snapshot is not an OS sandbox; actual-engine evidence is Linux-only. See [adapter](secret-adapter.md).

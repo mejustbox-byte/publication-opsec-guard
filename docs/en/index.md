@@ -38,3 +38,6 @@ All examples are synthetic. Production exports, secrets, internal organization n
 - [Installation and distribution](installation.md)
 
 - [CI and pre-commit integrations](integrations.md)
+
+
+[Pinned secret adapter](secret-adapter.md) delivered in 0.2.0a4. This supersedes the earlier planned-adapter status. Binary-document handling remains planned.

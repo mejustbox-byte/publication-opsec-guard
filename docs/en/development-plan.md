@@ -45,3 +45,6 @@ M3 delivered: [54 labeled rule cases](rule-corpus.md), 38 test methods locally. 
 
 
 M5 integration gate: Action and hook implemented; specialist adapter remains planned. See [integration guide](integrations.md).
+
+
+[Pinned secret adapter](secret-adapter.md) delivered in 0.2.0a4. This supersedes the earlier planned-adapter status. Binary-document handling remains planned.

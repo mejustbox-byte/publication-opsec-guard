@@ -71,3 +71,6 @@ Upstream references: [pre-commit configuration](https://pre-commit.com/), [Gitle
 ---
 
 [Documentation index](index.md) · [Русский](../ru/integrations.md)
+
+
+[Pinned secret adapter](secret-adapter.md) delivered in 0.2.0a4. This supersedes the earlier planned-adapter status. Binary-document handling remains planned.

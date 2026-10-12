@@ -51,3 +51,19 @@ jobs:
           ACTUAL_OUTCOME: ${{ steps.finding_action.outcome }}
           ACTUAL_CODE: ${{ steps.finding_action.outputs.exit-code }}
         run: python -c "import os; assert os.environ['ACTUAL_OUTCOME'] == 'failure'; assert os.environ['ACTUAL_CODE'] == '1'"
+      - name: Install pinned Gitleaks for real-engine verification
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/gitleaks-verified"
+          cd "$RUNNER_TEMP/gitleaks-verified"
+          curl --fail --location --retry 2 --output gitleaks_8.24.2_linux_x64.tar.gz https://github.com/gitleaks/gitleaks/releases/download/v8.24.2/gitleaks_8.24.2_linux_x64.tar.gz
+          curl --fail --location --retry 2 --output checksums.txt https://github.com/gitleaks/gitleaks/releases/download/v8.24.2/gitleaks_8.24.2_checksums.txt
+          sha256sum --check --ignore-missing checksums.txt
+          tar -xzf gitleaks_8.24.2_linux_x64.tar.gz gitleaks
+      - name: Verify real Gitleaks adapter
+        if: runner.os == 'Linux'
+        env:
+          GITLEAKS_TEST_BINARY: ${{ runner.temp }}/gitleaks-verified/gitleaks
+        run: python verify_gitleaks.py
