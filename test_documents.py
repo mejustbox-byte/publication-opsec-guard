@@ -36,7 +36,7 @@ class DocumentTests(unittest.TestCase):
         self.assertEqual(exit_code(result), 0)
         self.assertEqual(result['parts_inspected'], 3)
         from jsonschema import Draft202012Validator
-        schema = json.loads((Path(__file__).parent/'schemas/documents-0.1.schema.json').read_text())
+        schema = json.loads((Path(__file__).parent/'schemas/documents-0.2.schema.json').read_text())
         Draft202012Validator.check_schema(schema)
         self.assertTrue(Draft202012Validator(schema).is_valid(result))
 
@@ -129,7 +129,7 @@ class DocumentTests(unittest.TestCase):
 
     def test_schema_for_result_states(self):
         from jsonschema import Draft202012Validator
-        schema = json.loads((Path(__file__).parent/'schemas/documents-0.1.schema.json').read_text())
+        schema = json.loads((Path(__file__).parent/'schemas/documents-0.2.schema.json').read_text())
         validator = Draft202012Validator(schema)
         for text, extras in [('safe', {}), ('10.1.2.3', {}), ('safe', {'word/media/a.png': b'unknown'}),
                              ('safe', {'docProps/core.xml':'<x><creator>synthetic</creator></x>'})]:
@@ -154,6 +154,6 @@ class DocumentTests(unittest.TestCase):
             result = subprocess.run([sys.executable, '-m', 'publication_opsec_guard.documents', str(self.path)],
                                     capture_output=True, text=True, timeout=20)
             self.assertEqual(result.returncode, code, result.stderr)
-            self.assertEqual(json.loads(result.stdout)['schema_version'], 'documents-0.1')
+            self.assertEqual(json.loads(result.stdout)['schema_version'], 'documents-0.2')
 
 if __name__ == '__main__': unittest.main()

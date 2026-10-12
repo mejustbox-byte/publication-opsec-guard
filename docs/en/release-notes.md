@@ -1,3 +1,7 @@
+# Alpha 0.2.0a6: PPTX XML profile
+
+Adds PresentationML package recognition, joined DrawingML text, notes/hidden-slide inspection and legacy comment-author metadata. Documents envelope moves to 0.2 with explicit format and generic OOXML scope/package reason; 0.1 schema remains for historic outputs. Core and secrets contracts are unchanged. Seven new presentation test methods, 71 total. Media/embeddings remain gaps, and PowerPoint rendering is unverified. See [PPTX/migration](pptx-inspection.md).
+
 # Alpha 0.2.0a5: DOCX XML profile
 
 Adds publication-opsec-documents, bounded DOCX XML extraction, split-run matching, selected identity metadata finding DOC-001, explicit image/embedding/external-reference gaps and documents-0.1 JSON Schema. Existing report-0.2 and secrets-0.1 envelopes are unchanged. Fourteen synthetic DOCX methods bring the suite to 64; full Word rendering and other formats are unverified. See [DOCX guide](docx-inspection.md).

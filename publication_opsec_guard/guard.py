@@ -9,7 +9,7 @@ import re
 import stat
 import sys
 
-VERSION = "0.2.0a5"
+VERSION = "0.2.0a6"
 SCHEMA_VERSION = "0.2"
 TEXT = {'.txt', '.md', '.rst', '.json', '.yaml', '.yml', '.toml', '.ini', '.conf', '.csv', '.py', '.ps1', '.sh', '.xml', '.html', '.env'}
 EXCLUDED = {'.git', '__pycache__'}

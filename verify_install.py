@@ -44,7 +44,7 @@ def main():
         material = temp / 'material'; material.mkdir()
         file = material / 'sample.txt'; file.write_text('safe', encoding='utf-8')
         clean = run([scanner, material], temp, env=env)
-        assert json.loads(clean.stdout)['tool_version'] == '0.2.0a5'
+        assert json.loads(clean.stdout)['tool_version'] == '0.2.0a6'
         run([secrets, '--help'], temp, env=env)
         run([documents, '--help'], temp, env=env)
         document_result = run([documents, temp / 'missing.docx'], temp, expected=2, env=env)
