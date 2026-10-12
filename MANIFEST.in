@@ -6,3 +6,4 @@ include guard.py validate_report.py
 include test_*.py check_docs.py
 include verify_install.py
 include action.yml run_integration.py verify_hook.py .pre-commit-hooks.yaml
+include verify_gitleaks.py

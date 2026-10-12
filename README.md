@@ -6,7 +6,7 @@
 
 Guard locates working addresses, internal domains, user paths, private-key headers and organization markers in prepared material. It identifies files and lines, retains uninspected objects and leaves publication decisions to the information owner.
 
-> **0.2.0a3 is a text-only alpha prototype.** PDF, Office, images, archives and Git history are not inspected. Exit code 0 does not guarantee the absence of secrets.
+> **0.2.0a4 is a text-only alpha prototype.** PDF, Office, images, archives and Git history are not inspected. Exit code 0 does not guarantee the absence of secrets.
 
 [Русский](README.ru.md) · [Full guide](docs/en/index.md) · [Rules](docs/en/rule-catalog.md) · [CLI](docs/en/cli-reference.md) · [Roadmap](docs/en/development-plan.md)
 
@@ -56,3 +56,6 @@ Start with the [documentation index](docs/en/index.md): requirements, threats, a
 
 
 [Install the CLI package](docs/en/installation.md): core install `python3 -m pip install .`; optional validator `python3 -m pip install ".[validation]"`. PyPI publication is not claimed.
+
+
+[Optional Gitleaks adapter](docs/en/secret-adapter.md): separate command with explicit pinned binary/digest and unavailable-engine status.

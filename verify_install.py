@@ -37,12 +37,17 @@ def main():
         suffix = '.exe' if os.name == 'nt' else ''
         scanner = bindir / ('publication-opsec-guard' + suffix)
         validator = bindir / ('publication-opsec-validate' + suffix)
+        secrets = bindir / ('publication-opsec-secrets' + suffix)
         run([python, '-m', 'pip', 'install', '--no-index', '--no-deps', wheels[0]], temp, env=env)
         run([python, '-m', 'pip', 'check'], temp, env=env)
         material = temp / 'material'; material.mkdir()
         file = material / 'sample.txt'; file.write_text('safe', encoding='utf-8')
         clean = run([scanner, material], temp, env=env)
-        assert json.loads(clean.stdout)['tool_version'] == '0.2.0a3'
+        assert json.loads(clean.stdout)['tool_version'] == '0.2.0a4'
+        run([secrets, '--help'], temp, env=env)
+        missing = run([secrets, material, '--gitleaks', temp / 'missing',
+                       '--engine-sha256', '0' * 64], temp, expected=2, env=env)
+        assert json.loads(missing.stdout)['engine']['reason'] == 'engine_missing'
         report = temp / 'report.json'; report.write_text(clean.stdout, encoding='utf-8')
         absent = run([validator, report], temp, expected=3, env=env)
         assert json.loads(absent.stdout)['errors'][0]['code'] == 'dependency_missing'

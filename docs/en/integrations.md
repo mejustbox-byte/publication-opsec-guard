@@ -60,7 +60,7 @@ Four subprocess test methods cover clean material, findings, unsupported format,
 
 ## Specialist engine boundary
 
-The secret-scanner adapter remains planned. Gitleaks is a candidate reviewed through its upstream documentation, but this integration does not install or execute it. Engine license/version, deterministic configuration, subprocess limits, redacted conversion and explicit missing-engine/failure states must be decided and tested before claiming delivery. M5 is partially complete: Action and hook delivered; adapter outstanding. Do not describe Guard's key-header rule as comprehensive secret discovery.
+The optional [pinned Gitleaks adapter](secret-adapter.md) is delivered as a separate command in 0.2.0a4. The core Action/hook still runs only the text scanner. Add a separate adapter step when needed; an unavailable engine is not a clean result. The real engine has Linux evidence only. Guard key-header detection alone remains incomplete secret discovery.
 
 ## Troubleshooting
 
@@ -71,3 +71,6 @@ Upstream references: [pre-commit configuration](https://pre-commit.com/), [Gitle
 ---
 
 [Documentation index](index.md) · [Русский](../ru/integrations.md)
+
+
+[Pinned secret adapter](secret-adapter.md) delivered in 0.2.0a4. This supersedes the earlier planned-adapter status. Binary-document handling remains planned.
