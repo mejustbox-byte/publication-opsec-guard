@@ -1,3 +1,7 @@
+# Alpha 0.2.0a5: DOCX XML profile
+
+Adds publication-opsec-documents, bounded DOCX XML extraction, split-run matching, selected identity metadata finding DOC-001, explicit image/embedding/external-reference gaps and documents-0.1 JSON Schema. Existing report-0.2 and secrets-0.1 envelopes are unchanged. Fourteen synthetic DOCX methods bring the suite to 64; full Word rendering and other formats are unverified. See [DOCX guide](docx-inspection.md).
+
 # Alpha 0.2.0a4: optional secret engine
 
 Adds the separate publication-opsec-secrets CLI with pinned version/digest, bounded UTF-8 snapshot, redacted metadata conversion and explicit unavailable-engine states. Existing core report schema stays 0.2; adapter envelope is secrets-0.1 and is not accepted by the core validator. Core Action/hook are unchanged. Eight adapter test methods plus Linux real-engine synthetic verification are supplied. See [adapter](secret-adapter.md).
@@ -44,7 +48,7 @@ Five UTF-8 text checks: RFC1918 IPv4, `.local`/`.internal` domains, home paths, 
 
 ### Earlier baseline verification
 
-Nine tests passed in [CI 38153720204](https://github.com/mejustbox-byte/publication-opsec-guard/actions/runs/38153720204) on Linux, Windows and macOS with Python 3.13. Tested head: `540e1124cd2ad35f08234df589a2f07af3357dce`; merge: `6347596d5ce6e13fe3692fdcb0bf58a9fb7ceea4`. The matrix explains each test's evidentiary limits.
+Nine tests passed in [CI 38153720204](https://github.com/mejustbox-byte/publication-opsec-guard/actions/runs/38153720204) on Linux, Windows and macOS with Python 3.13. Tested head: `540e1124cd2ad35f08234df589a2f07af3357dce`; merge: `6447596d5ce6e13fe3692fdcb0bf58a9fb7ceea4`. The matrix explains each test's evidentiary limits.
 
 ### Known limitations
 
@@ -63,7 +67,7 @@ Code is in the public repository; the GitHub alpha release is prepared as a draf
 
 ### Previous hardening verification
 
-All 22 tests passed on Linux, Windows and macOS with Python 3.13 in [run 38155720812](https://github.com/mejustbox-byte/publication-opsec-guard/actions/runs/38155720812) at implementation head `197f07d563b25193c86ab011e8bfd0798e005bc1`. Documentation links, language parity and the user-guide example were checked locally.
+All 22 tests passed on Linux, Windows and macOS with Python 3.13 in [run 38155720812](https://github.com/mejustbox-byte/publication-opsec-guard/actions/runs/38155720812) at implementation head `197f07d564b25193c86ab011e8bfd0798e005bc1`. Documentation links, language parity and the user-guide example were checked locally.
 
 ---
 

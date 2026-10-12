@@ -1,0 +1,217 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "documents-0.1"
+    },
+    "tool_version": {
+      "type": "string"
+    },
+    "scope": {
+      "const": "docx-utf8-xml-text-and-selected-identity-metadata"
+    },
+    "asset_id": {
+      "type": "string"
+    },
+    "coverage_complete": {
+      "type": "boolean"
+    },
+    "parts_inspected": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "xml_bytes_read": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "limits": {
+      "type": "object",
+      "properties": {
+        "archive_bytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "parts": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "part_bytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "total_xml_bytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "compression_ratio": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "xml_depth": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "xml_elements": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "findings": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "archive_bytes",
+        "parts",
+        "part_bytes",
+        "total_xml_bytes",
+        "compression_ratio",
+        "xml_depth",
+        "xml_elements",
+        "findings"
+      ],
+      "additionalProperties": false
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "check_id": {
+            "enum": [
+              "DOC-001",
+              "PUB-001",
+              "PUB-002",
+              "PUB-003",
+              "PUB-004",
+              "PUB-005"
+            ]
+          },
+          "asset_id": {
+            "type": "string"
+          },
+          "part_id": {
+            "type": "string"
+          },
+          "status": {
+            "const": "fail"
+          },
+          "severity": {
+            "enum": [
+              "medium",
+              "high",
+              "critical"
+            ]
+          },
+          "evidence": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "const": "identity_metadata"
+                  },
+                  "redacted": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "kind",
+                  "redacted"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "const": "extracted_line"
+                  },
+                  "redacted": {
+                    "const": true
+                  },
+                  "line": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "kind",
+                  "redacted",
+                  "line"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          },
+          "remediation": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "check_id",
+          "asset_id",
+          "part_id",
+          "status",
+          "severity",
+          "evidence",
+          "remediation"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "coverage_gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "const": "not_tested"
+          },
+          "reason": {
+            "enum": [
+              "uninspected_zip_metadata",
+          "xml_comments_or_processing_instructions",
+          "archive_size_limit",
+              "part_count_limit",
+              "unsafe_or_duplicate_part",
+              "encrypted_part",
+              "unsupported_compression",
+              "part_size_or_ratio_limit",
+              "invalid_docx_package",
+              "unsupported_part",
+              "total_xml_bytes_limit",
+              "part_read_limit",
+              "invalid_or_unsupported_xml",
+              "external_reference",
+              "extracted_text_incomplete",
+              "invalid_input_policy_or_package"
+            ]
+          },
+          "part_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "tool_version",
+    "scope",
+    "asset_id",
+    "coverage_complete",
+    "parts_inspected",
+    "xml_bytes_read",
+    "limits",
+    "findings",
+    "coverage_gaps"
+  ],
+  "additionalProperties": false
+}

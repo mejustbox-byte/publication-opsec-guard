@@ -38,13 +38,17 @@ def main():
         scanner = bindir / ('publication-opsec-guard' + suffix)
         validator = bindir / ('publication-opsec-validate' + suffix)
         secrets = bindir / ('publication-opsec-secrets' + suffix)
+        documents = bindir / ('publication-opsec-documents' + suffix)
         run([python, '-m', 'pip', 'install', '--no-index', '--no-deps', wheels[0]], temp, env=env)
         run([python, '-m', 'pip', 'check'], temp, env=env)
         material = temp / 'material'; material.mkdir()
         file = material / 'sample.txt'; file.write_text('safe', encoding='utf-8')
         clean = run([scanner, material], temp, env=env)
-        assert json.loads(clean.stdout)['tool_version'] == '0.2.0a4'
+        assert json.loads(clean.stdout)['tool_version'] == '0.2.0a5'
         run([secrets, '--help'], temp, env=env)
+        run([documents, '--help'], temp, env=env)
+        document_result = run([documents, temp / 'missing.docx'], temp, expected=2, env=env)
+        assert not json.loads(document_result.stdout)['coverage_complete']
         missing = run([secrets, material, '--gitleaks', temp / 'missing',
                        '--engine-sha256', '0' * 64], temp, expected=2, env=env)
         assert json.loads(missing.stdout)['engine']['reason'] == 'engine_missing'
